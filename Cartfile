@@ -1,2 +1,11 @@
+#
+# Project dependencies
+#
 # RxSwift
 github "ReactiveX/RxSwift" ~> 3.0
+
+#
+# Test Dependencies
+#
+# Cuckoo - Mockito for Swift
+github "SwiftKit/Cuckoo"
