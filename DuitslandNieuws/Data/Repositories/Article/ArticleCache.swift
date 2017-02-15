@@ -4,6 +4,14 @@
 //
 
 import Foundation
+import RxSwift
 
 class ArticleCache {
+    func list() -> Observable<[Article]> {
+        return Observable.empty()
+    }
+
+    func save(_ list: [Article]) -> Observable<[Article]> {
+        return Observable.empty()
+    }
 }

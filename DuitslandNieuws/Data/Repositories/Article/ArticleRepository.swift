@@ -10,13 +10,17 @@ class ArticleRepository {
     let cache: ArticleCache
     let cloud: ArticleCloud
 
-     init(_ cache: ArticleCache, _ cloud: ArticleCloud) {
-         self.cache = cache
-         self.cloud = cloud
-     }
+    init(_ cache: ArticleCache, _ cloud: ArticleCloud) {
+        self.cache = cache
+        self.cloud = cloud
+    }
 
     func list() -> Observable<[Article]> {
-        return Observable.empty()
+        return cache.list()
+                .ifEmpty(switchTo: cloud.list()
+                        .flatMap { [unowned self] in
+                            self.cache.save($0)
+                        })
     }
-    
+
 }

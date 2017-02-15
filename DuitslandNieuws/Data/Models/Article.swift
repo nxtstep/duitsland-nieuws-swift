@@ -8,3 +8,8 @@ import Foundation
 struct Article {
     let articleId: String
 }
+
+extension Article: Equatable {}
+func ==(lhs: Article, rhs: Article) -> Bool {
+    return lhs.articleId == rhs.articleId
+}

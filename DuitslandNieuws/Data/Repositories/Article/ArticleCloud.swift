@@ -4,6 +4,10 @@
 //
 
 import Foundation
+import RxSwift
 
 class ArticleCloud {
+    func list() -> Observable<[Article]> {
+        return Observable.empty()
+    }
 }
