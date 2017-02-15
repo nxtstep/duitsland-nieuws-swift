@@ -16,7 +16,7 @@ class ArticleRepository {
     }
 
     func list() -> Observable<[Article]> {
-        return cache.list()
+        return cache.listAll()
                 .ifEmpty(switchTo: cloud.list()
                         .flatMap { [unowned self] in
                             self.cache.save($0)
