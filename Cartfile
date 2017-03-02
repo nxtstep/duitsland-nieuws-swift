@@ -3,9 +3,10 @@
 #
 # RxSwift
 github "ReactiveX/RxSwift" ~> 3.0
+github "lukaskubanek/OrderedDictionary" ~> 1.0
 
 #
 # Test Dependencies
 #
 # Cuckoo - Mockito for Swift
-github "SwiftKit/Cuckoo"
+github "nxtstep/Cuckoo" ~> 0.8

@@ -8,13 +8,21 @@
 
 /* Begin PBXBuildFile section */
 		58C54059424BA112F9BA9115 /* ArticleRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C54B3E5E89B578CBE8DB09 /* ArticleRepository.swift */; };
+		58C540B9D5694E3BFE96BF46 /* SimpleMemCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C5435D255BC1D6D9247E34 /* SimpleMemCache.swift */; };
+		58C5412135A17043CC5B3539 /* OrderedDictionary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58C548E902798F7E7A5C5F29 /* OrderedDictionary.framework */; };
+		58C543741BBEE1B3F31C43D7 /* ArticleCacheTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C541FE2DD6F2E9A322ACCF /* ArticleCacheTest.swift */; };
 		58C5447F01E9752F857C04A0 /* ArticleCloud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C5453AFC70B61CBBC8791D /* ArticleCloud.swift */; };
+		58C54502DC435266E7021C80 /* Collection+empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C54315652A852F262DCD12 /* Collection+empty.swift */; };
+		58C548965D2D771DD6177AC2 /* SimpleMemCacheTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C54114FD5064EB33D933C5 /* SimpleMemCacheTest.swift */; };
 		58C54B463CB52DFFD9895651 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C540D1C722829373C877AC /* Article.swift */; };
 		58C54DD53DB4D8E3952C293A /* ArticleCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C54A0E1F2B46FA8AFCC0FD /* ArticleCache.swift */; };
+		D6290F881E65DF5F00CBDD2D /* AnyWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6290F871E65DF5F00CBDD2D /* AnyWrapper.swift */; };
+		D6290F8B1E65E1E900CBDD2D /* Observable+ZipWith.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6290F8A1E65E1E900CBDD2D /* Observable+ZipWith.swift */; };
 		D6517A0A1E5362D1004DAA8B /* GeneratedMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6517A081E5362D1004DAA8B /* GeneratedMocks.swift */; };
 		D6517A0B1E54617A004DAA8B /* Cuckoo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6517A041E536090004DAA8B /* Cuckoo.framework */; };
 		D6517A0D1E54627D004DAA8B /* RxTest.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D69152FA1E53415A00E95DF7 /* RxTest.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D6517A101E546285004DAA8B /* Cuckoo.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D6517A041E536090004DAA8B /* Cuckoo.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D65C5BF21E5606A500D25697 /* OrderedDictionary.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 58C548E902798F7E7A5C5F29 /* OrderedDictionary.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D6657DEF1E5322D3008B00A3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6657DEE1E5322D3008B00A3 /* AppDelegate.swift */; };
 		D6657DF11E5322D3008B00A3 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6657DF01E5322D3008B00A3 /* MasterViewController.swift */; };
 		D6657DF31E5322D3008B00A3 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6657DF21E5322D3008B00A3 /* DetailViewController.swift */; };
@@ -52,6 +60,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				D65C5BF21E5606A500D25697 /* OrderedDictionary.framework in Embed Frameworks */,
 				D6517A101E546285004DAA8B /* Cuckoo.framework in Embed Frameworks */,
 				D6517A0D1E54627D004DAA8B /* RxTest.framework in Embed Frameworks */,
 			);
@@ -62,10 +71,17 @@
 
 /* Begin PBXFileReference section */
 		58C540D1C722829373C877AC /* Article.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
+		58C54114FD5064EB33D933C5 /* SimpleMemCacheTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleMemCacheTest.swift; sourceTree = "<group>"; };
+		58C541FE2DD6F2E9A322ACCF /* ArticleCacheTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleCacheTest.swift; sourceTree = "<group>"; };
 		58C5426E014021CD1A0A35CE /* ArticleRepositoryTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleRepositoryTest.swift; sourceTree = "<group>"; };
+		58C54315652A852F262DCD12 /* Collection+empty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Collection+empty.swift"; sourceTree = "<group>"; };
+		58C5435D255BC1D6D9247E34 /* SimpleMemCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleMemCache.swift; sourceTree = "<group>"; };
 		58C5453AFC70B61CBBC8791D /* ArticleCloud.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleCloud.swift; sourceTree = "<group>"; };
+		58C548E902798F7E7A5C5F29 /* OrderedDictionary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OrderedDictionary.framework; path = "/Users/arjan/supersimple.io/duitslandnieuws.nl/swift-app/DuitslandNieuws/Carthage/Build/iOS/OrderedDictionary.framework"; sourceTree = "<absolute>"; };
 		58C54A0E1F2B46FA8AFCC0FD /* ArticleCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleCache.swift; sourceTree = "<group>"; };
 		58C54B3E5E89B578CBE8DB09 /* ArticleRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleRepository.swift; sourceTree = "<group>"; };
+		D6290F871E65DF5F00CBDD2D /* AnyWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnyWrapper.swift; sourceTree = "<group>"; };
+		D6290F8A1E65E1E900CBDD2D /* Observable+ZipWith.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Observable+ZipWith.swift"; sourceTree = "<group>"; };
 		D6517A041E536090004DAA8B /* Cuckoo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cuckoo.framework; path = Carthage/Build/iOS/Cuckoo.framework; sourceTree = "<group>"; };
 		D6517A081E5362D1004DAA8B /* GeneratedMocks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneratedMocks.swift; sourceTree = "<group>"; };
 		D6657DEB1E5322D3008B00A3 /* DuitslandNieuws.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DuitslandNieuws.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -93,6 +109,7 @@
 			files = (
 				D69152F71E533EC900E95DF7 /* RxCocoa.framework in Frameworks */,
 				D69152F81E533EC900E95DF7 /* RxSwift.framework in Frameworks */,
+				58C5412135A17043CC5B3539 /* OrderedDictionary.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,6 +152,7 @@
 			isa = PBXGroup;
 			children = (
 				58C54CEED1672F8120DF1392 /* Article */,
+				58C54114FD5064EB33D933C5 /* SimpleMemCacheTest.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -145,6 +163,7 @@
 				58C545B327E0C8D3B2E0EEAC /* Api */,
 				58C5435A41E43833D489E64E /* Models */,
 				58C54B434FA52F0C543A4756 /* Repositories */,
+				58C54ABA386782B5E276AB83 /* Collection */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -173,10 +192,19 @@
 			path = Presentation;
 			sourceTree = "<group>";
 		};
+		58C54ABA386782B5E276AB83 /* Collection */ = {
+			isa = PBXGroup;
+			children = (
+				58C54315652A852F262DCD12 /* Collection+empty.swift */,
+			);
+			path = Collection;
+			sourceTree = "<group>";
+		};
 		58C54B434FA52F0C543A4756 /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
 				58C54492674D0288E445097C /* Article */,
+				58C5435D255BC1D6D9247E34 /* SimpleMemCache.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -185,8 +213,25 @@
 			isa = PBXGroup;
 			children = (
 				58C5426E014021CD1A0A35CE /* ArticleRepositoryTest.swift */,
+				58C541FE2DD6F2E9A322ACCF /* ArticleCacheTest.swift */,
 			);
 			path = Article;
+			sourceTree = "<group>";
+		};
+		D6290F861E65DF3000CBDD2D /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				D6290F871E65DF5F00CBDD2D /* AnyWrapper.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		D6290F891E65E1B900CBDD2D /* Rx */ = {
+			isa = PBXGroup;
+			children = (
+				D6290F8A1E65E1E900CBDD2D /* Observable+ZipWith.swift */,
+			);
+			path = Rx;
 			sourceTree = "<group>";
 		};
 		D6517A061E5362D1004DAA8B /* Mocks */ = {
@@ -221,6 +266,8 @@
 		D6657DED1E5322D3008B00A3 /* DuitslandNieuws */ = {
 			isa = PBXGroup;
 			children = (
+				D6290F891E65E1B900CBDD2D /* Rx */,
+				D6290F861E65DF3000CBDD2D /* Common */,
 				D6657DEE1E5322D3008B00A3 /* AppDelegate.swift */,
 				D6657DF01E5322D3008B00A3 /* MasterViewController.swift */,
 				D6657DF21E5322D3008B00A3 /* DetailViewController.swift */,
@@ -260,6 +307,7 @@
 				D69152FA1E53415A00E95DF7 /* RxTest.framework */,
 				D69152F51E533EC900E95DF7 /* RxCocoa.framework */,
 				D69152F61E533EC900E95DF7 /* RxSwift.framework */,
+				58C548E902798F7E7A5C5F29 /* OrderedDictionary.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -425,7 +473,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Define output file. Change \"$PROJECT_DIR/Tests\" to your test's root source folder, if it's not the default name.\nOUTPUT_FILE=\"$PROJECT_DIR/$TARGET_NAME/Mocks/GeneratedMocks.swift\"\necho \"Generated Mocks File = $OUTPUT_FILE\"\n\n# Define input directory. Change \"$PROJECT_DIR\" to your project's root source folder, if it's not the default name.\nINPUT_DIR=\"$PROJECT_DIR/$PROJECT_NAME\"\necho \"Mocks Input Directory = $INPUT_DIR\"\n\n# Generate mock files, include as many input files as you'd like to create mocks for.\nCarthage/Checkouts/Cuckoo/run generate --testable \"$PROJECT_NAME\" \\\n--output \"${OUTPUT_FILE}\" \\\n\"$INPUT_DIR/Data/Repositories/Article/ArticleCache.swift\" \\\n\"$INPUT_DIR/Data/Repositories/Article/ArticleCloud.swift\" \\\n\"$INPUT_DIR/Data/Repositories/Article/ArticleRepository.swift\"\n# ... and so forth\n";
+			shellScript = "# Define output file. Change \"$PROJECT_DIR/Tests\" to your test's root source folder, if it's not the default name.\nOUTPUT_FILE=\"$PROJECT_DIR/$TARGET_NAME/Mocks/GeneratedMocks.swift\"\necho \"Generated Mocks File = $OUTPUT_FILE\"\n\n# Define input directory. Change \"$PROJECT_DIR\" to your project's root source folder, if it's not the default name.\nINPUT_DIR=\"$PROJECT_DIR/$PROJECT_NAME\"\necho \"Mocks Input Directory = $INPUT_DIR\"\n\n# Generate mock files, include as many input files as you'd like to create mocks for.\n\"$PROJECT_DIR/Carthage/Checkouts/Cuckoo/run\" generate --testable \"$PROJECT_NAME\" \\\n--exclude \"Cache,Identifiable\" \\\n--output \"${OUTPUT_FILE}\" \\\n\"$INPUT_DIR/Data/Repositories/Article/ArticleCache.swift\" \\\n\"$INPUT_DIR/Data/Repositories/Article/ArticleCloud.swift\" \\\n\"$INPUT_DIR/Data/Repositories/Article/ArticleRepository.swift\" \\\n\"$INPUT_DIR/Data/Repositories/SimpleMemCache.swift\"\n# ... and so forth\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -436,11 +484,15 @@
 			files = (
 				D6657DF31E5322D3008B00A3 /* DetailViewController.swift in Sources */,
 				D6657DF11E5322D3008B00A3 /* MasterViewController.swift in Sources */,
+				D6290F881E65DF5F00CBDD2D /* AnyWrapper.swift in Sources */,
 				D6657DEF1E5322D3008B00A3 /* AppDelegate.swift in Sources */,
 				58C54059424BA112F9BA9115 /* ArticleRepository.swift in Sources */,
 				58C54B463CB52DFFD9895651 /* Article.swift in Sources */,
 				58C54DD53DB4D8E3952C293A /* ArticleCache.swift in Sources */,
 				58C5447F01E9752F857C04A0 /* ArticleCloud.swift in Sources */,
+				D6290F8B1E65E1E900CBDD2D /* Observable+ZipWith.swift in Sources */,
+				58C540B9D5694E3BFE96BF46 /* SimpleMemCache.swift in Sources */,
+				58C54502DC435266E7021C80 /* Collection+empty.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -450,6 +502,8 @@
 			files = (
 				D69152FD1E534EDC00E95DF7 /* ArticleRepositoryTest.swift in Sources */,
 				D6517A0A1E5362D1004DAA8B /* GeneratedMocks.swift in Sources */,
+				58C548965D2D771DD6177AC2 /* SimpleMemCacheTest.swift in Sources */,
+				58C543741BBEE1B3F31C43D7 /* ArticleCacheTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

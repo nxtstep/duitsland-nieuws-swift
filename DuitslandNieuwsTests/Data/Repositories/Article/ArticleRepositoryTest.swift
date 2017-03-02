@@ -16,8 +16,11 @@ class ArticleRepositoryTest: XCTestCase {
         /// Given
         let mockCache = MockArticleCache()
         stub(mockCache) { stub in
-            when(stub.list()).thenReturn(Observable.empty())
-            when(stub.save(any())).then { list in
+            when(stub.listAll()).thenReturn(Observable.empty())
+            when(stub.save(any(Article.self))).then { article in
+                        return Observable.just(article)
+                    }
+            when(stub.save(any([Article].self))).then { list in
                         return Observable.just(list)
                     }
         }
@@ -44,8 +47,8 @@ class ArticleRepositoryTest: XCTestCase {
         ]
         XCTAssertEqual(recorder.events, expected)
 
-        verify(mockCache, times(1)).list()
-        verify(mockCache, times(1)).save(any())
+        verify(mockCache, times(1)).listAll()
+        verify(mockCache, times(1)).save(any([Article].self))
         verify(mockCloud, times(1)).list()
     }
 }
