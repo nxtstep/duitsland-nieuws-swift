@@ -7,6 +7,7 @@ import XCTest
 import Cuckoo
 import RxSwift
 import RxTest
+import RxMoya
 @testable import DuitslandNieuws
 
 class ArticleRepositoryTest: XCTestCase {
@@ -25,7 +26,9 @@ class ArticleRepositoryTest: XCTestCase {
                     }
         }
 
-        let mockCloud = MockArticleCloud()
+
+        let mockArticleProvider = RxMoyaProvider<ArticleEndpoint>()
+        let mockCloud = MockArticleCloud(provider: mockArticleProvider)
         stub(mockCloud) { stub in
             when(stub.list()).thenReturn(Observable.from([ArticleRepositoryTest.testArticle]))
         }

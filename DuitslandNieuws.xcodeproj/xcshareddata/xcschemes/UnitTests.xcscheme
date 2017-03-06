@@ -43,6 +43,15 @@
             </LocationScenarioReference>
          </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "D6657E001E5322D3008B00A3"
+            BuildableName = "DuitslandNieuwsTests.xctest"
+            BlueprintName = "DuitslandNieuwsTests"
+            ReferencedContainer = "container:DuitslandNieuws.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
