@@ -11,6 +11,8 @@ class ArticleCloud {
     typealias V = Article
     typealias Endpoint = ArticleEndpoint
 
+    static let defaultPageSize = 10
+    
     let articleProvider: RxMoyaProvider<Endpoint>
 
     required init(provider: RxMoyaProvider<Endpoint>) {
@@ -18,12 +20,11 @@ class ArticleCloud {
     }
 
     func list() -> Observable<[V]> {
-        return articleProvider.request(.list(page: 0, size: 10))
-                .mapArray(Article.self)
+        return self.list(0, pageSize: ArticleCloud.defaultPageSize)
     }
 
     func list(_ page: Int, pageSize size: Int) -> Observable<[V]> {
-        return articleProvider.request(.list(page: page, size: size))
+        return articleProvider.request(.list(page: page + 1, size: size))
                 .mapArray(Article.self)
     }
 

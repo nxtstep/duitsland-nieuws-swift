@@ -19,7 +19,12 @@ class ArticleCloudTest: XCTestCase {
         let samplePath = testResourcePath(for: ArticleCloudTest.self, name: "post_50152.json")
         let endpointClosure = { (target: ArticleEndpoint) -> Endpoint<ArticleEndpoint> in
             let url = target.baseURL.appendingPathComponent(target.path).absoluteString
-            return Endpoint(url: url, sampleResponseClosure: {.networkResponse(200, samplePath.sampleData)}, method: target.method, parameters: target.parameters)
+            switch target {
+            case .article(_):
+                return Endpoint(url: url, sampleResponseClosure: { .networkResponse(200, samplePath.sampleData) }, method: target.method, parameters: target.parameters)
+            default:
+                return Endpoint(url: url, sampleResponseClosure: { .networkResponse(500, Data()) }, method: target.method, parameters: target.parameters)
+            }
         }
 
         let articleEndpoint = RxMoyaProvider<ArticleEndpoint>(endpointClosure: endpointClosure, stubClosure: MoyaProvider.immediatelyStub)
@@ -38,5 +43,38 @@ class ArticleCloudTest: XCTestCase {
                 completed(200)
         ]
         XCTAssertEqual(recorder.events, expected)
+    }
+
+    func test_list() {
+        /// Given
+        let testArticle1 = Article(articleId: "49978")
+        let samplePath = testResourcePath(for: ArticleCloudTest.self, name: "posts_page_1_10.json")
+        let endpointClosure = { (target: ArticleEndpoint) -> Endpoint<ArticleEndpoint> in
+            let url = target.baseURL.appendingPathComponent(target.path).absoluteString
+            switch target {
+            case let .list(page, size)
+                 where page == 1 && size == 10:
+                return Endpoint(url: url, sampleResponseClosure: { .networkResponse(200, samplePath.sampleData) }, method: target.method, parameters: target.parameters)
+            default:
+                return Endpoint(url: url, sampleResponseClosure: { .networkResponse(500, Data()) }, method: target.method, parameters: target.parameters)
+            }
+        }
+
+        let articleEndpoint = RxMoyaProvider<ArticleEndpoint>(endpointClosure: endpointClosure, stubClosure: MoyaProvider.immediatelyStub)
+        let cloud: ArticleCloud = ArticleCloud(provider: articleEndpoint)
+
+        /// When
+        let scheduler = TestScheduler(initialClock: 0)
+        let recorder = scheduler.start {
+            cloud.list(0, pageSize: 10)
+                    .flatMap {
+                        Observable.from($0)
+                    }
+        }
+
+        /// Then
+        XCTAssertEqual(recorder.events.count, 11)
+        XCTAssertEqual(recorder.events[0].value.element, next(200, testArticle1).value.element)
+        XCTAssertEqual(recorder.events[10].value.element, completed(200).value.element)
     }
 }
