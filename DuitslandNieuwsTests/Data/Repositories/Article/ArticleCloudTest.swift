@@ -29,7 +29,18 @@ class ArticleCloudTest: XCTestCase {
 
         let articleEndpoint = RxMoyaProvider<ArticleEndpoint>(endpointClosure: endpointClosure, stubClosure: MoyaProvider.immediatelyStub)
         let cloud: ArticleCloud = ArticleCloud(provider: articleEndpoint)
-        let expectedArticle = Article(articleId: "50152")
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        let expectedArticle = Article(articleId: "50152",
+                date: dateFormatter.date(from: "2017-01-23T11:55:11")!,
+                modified: dateFormatter.date(from: "2017-01-23T12:04:46")!,
+                slug: "waarom-frauke-petry-geert-wilders-hard-nodig",
+                link: "http://duitslandnieuws.nl/blog/2017/01/23/waarom-frauke-petry-geert-wilders-hard-nodig/",
+                title: RenderableText(rendered: "Waarom Frauke Petry Geert Wilders hard nodig heeft", protected: true),
+                content: RenderableText(rendered: "Content", protected: false),
+                excerpt: RenderableText(rendered: "Geert Wilders voerde afgelopen weekend campagne voor de AfD en stelde dat met Frauke Petry de toekomst van Duitsland verzekerd is. Tijdens de bijeenkomst van de Europese rechts-populisten in Koblenz bleek waarom Petry de Nederlandse PVV-leider goed kan gebruiken.<a class=\"read-more\" href=\"http://duitslandnieuws.nl/blog/2017/01/23/waarom-frauke-petry-geert-wilders-hard-nodig/\">--- meer ---</a>", protected: false),
+                author: "78",
+                featured_media: "40325")
 
         /// When
         let scheduler = TestScheduler(initialClock: 0)
@@ -47,7 +58,19 @@ class ArticleCloudTest: XCTestCase {
 
     func test_list() {
         /// Given
-        let testArticle1 = Article(articleId: "49978")
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        let testArticle1 = Article(articleId: "49978",
+                date: dateFormatter.date(from: "2017-01-08T07:24:03")!,
+                modified: dateFormatter.date(from: "2017-01-08T10:20:06")!,
+                slug: "wensdenken",
+                link: "http://duitslandnieuws.nl/blog/2017/01/08/wensdenken/",
+                title: RenderableText(rendered: "Wensdenken", protected: true),
+                content: RenderableText(rendered: "<p>Deze Amerikaanse boerenknech", protected: false),
+                excerpt: RenderableText(rendered: "Hij was amper 20 jaar oud en stond in de rij voor een vrachtauto die hem terug naar voren zou brengen. Naar voren. Dat was wel het laatste waar hij op zat te wachten op deze koude dag in januari. Een maand waren ze hier. Eigenlijk nog iets minder, maar het voelde als een jaar. Sinds 16 december had hij nauwelijks geslapen en het doorlopend koud gehad. Een kilometer of 15 waren ze uiteindelijk teruggetrokken. Nu dus weer de andere kant op.<a class=\"read-more\" href=\"http://duitslandnieuws.nl/blog/2017/01/08/wensdenken/\">--- meer ---</a>", protected: false),
+                author: "115",
+                featured_media: "49979")
+
         let samplePath = testResourcePath(for: ArticleCloudTest.self, name: "posts_page_1_10.json")
         let endpointClosure = { (target: ArticleEndpoint) -> Endpoint<ArticleEndpoint> in
             let url = target.baseURL.appendingPathComponent(target.path).absoluteString

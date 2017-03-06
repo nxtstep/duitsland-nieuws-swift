@@ -11,7 +11,16 @@ import RxMoya
 @testable import DuitslandNieuws
 
 class ArticleRepositoryTest: XCTestCase {
-    static let testArticle = Article(articleId: "123")
+    static let testArticle = Article(articleId: "123",
+            date: Date(),
+            modified: Date(),
+            slug: "slug",
+            link: "link",
+            title: RenderableText(rendered: "Title", protected: false),
+            content: RenderableText(rendered: "Content", protected: true),
+            excerpt: RenderableText(rendered: "Excerpt", protected: true),
+            author: "author-id",
+            featured_media: "featured-media-id")
 
     func test_get() {
         /// Given

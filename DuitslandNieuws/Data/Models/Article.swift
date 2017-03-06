@@ -8,21 +8,41 @@ import ObjectMapper
 
 struct Article {
     let articleId: String
+    let date: Date
+    let modified: Date
+    let slug: String
+    let link: String
+    let title: RenderableText
+    let content: RenderableText
+    let excerpt: RenderableText
+    let author: String
+    let featured_media: String
 }
 
 /// Mapping from JSON with ObjectMapper
+
 extension Article: ImmutableMappable {
+    static let jsonDateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+    static var dateFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = jsonDateFormat
+        return dateFormatter
+    }()
+
     init(map: Map) throws {
-        articleId = try map.value("id", using: TransformOf<String, Int>(fromJSON: { value in
-            guard let value = value else {
-                return nil
-            }
-            return String(value)
-        }, toJSON: { value in
-            return value.flatMap {
-                Int($0)
-            }
-        }))
+        articleId = try map.value("id", using: IntIdTransform())
+
+        date = try map.value("date", using: DateFormatterTransform(dateFormatter: Article.dateFormatter))
+        modified = try map.value("modified", using: DateFormatterTransform(dateFormatter: Article.dateFormatter))
+        slug = try map.value("slug")
+        link = try map.value("link")
+
+        title = try map.value("title")
+        content = try map.value("content")
+        excerpt = try map.value("excerpt")
+
+        author = try map.value("author", using: IntIdTransform())
+        featured_media = try map.value("featured_media", using: IntIdTransform())
     }
 }
 
@@ -30,5 +50,11 @@ extension Article: Equatable {
 }
 
 func ==(lhs: Article, rhs: Article) -> Bool {
-    return lhs.articleId == rhs.articleId
+    let res = lhs.articleId == rhs.articleId &&
+            lhs.date == rhs.date &&
+            lhs.modified == rhs.modified &&
+            lhs.slug == rhs.slug &&
+            lhs.link == rhs.link &&
+            lhs.author == rhs.author
+    return res
 }
