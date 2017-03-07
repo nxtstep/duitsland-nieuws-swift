@@ -9,11 +9,26 @@ import RxTest
 import OrderedDictionary
 @testable import DuitslandNieuws
 
+extension Article {
+    static func createTestArticle(_ id: String) -> Article {
+        return Article(articleId: id,
+                date: Date(),
+                modified: Date(),
+                slug: "slug",
+                link: "http://www.link.com/",
+                title: RenderableText(rendered: "Title", protected: true),
+                content: RenderableText(rendered: "Content", protected: false),
+                excerpt: RenderableText(rendered: "Excerpt", protected: false),
+                author: "author-id",
+                featured_media: "media-id")
+    }
+}
+
 class ArticleCacheTest: XCTestCase {
 
     func test_get() {
         /// Given
-        let testArticle = Article(articleId: "123")
+        let testArticle = Article.createTestArticle("123")
         var dict = OrderedDictionary<String, Article>()
         dict[testArticle.key] = testArticle
         let cache = ArticleCache(values: dict)
@@ -46,8 +61,8 @@ class ArticleCacheTest: XCTestCase {
 
     func test_list() {
         /// Given
-        let testArticle1 = Article(articleId: "1")
-        let testArticle2 = Article(articleId: "2")
+        let testArticle1 = Article.createTestArticle("1")
+        let testArticle2 = Article.createTestArticle("2")
         var dict = OrderedDictionary<String, Article>()
         dict[testArticle1.key] = testArticle1
         dict[testArticle2.key] = testArticle2
@@ -104,8 +119,8 @@ class ArticleCacheTest: XCTestCase {
 
     func test_list_all() {
         /// Given
-        let testArticle1 = Article(articleId: "1")
-        let testArticle2 = Article(articleId: "2")
+        let testArticle1 = Article.createTestArticle("1")
+        let testArticle2 = Article.createTestArticle("2")
         var dict = OrderedDictionary<String, Article>()
         dict[testArticle1.key] = testArticle1
         dict[testArticle2.key] = testArticle2
@@ -131,16 +146,17 @@ class ArticleCacheTest: XCTestCase {
 
     func test_save() {
         /// Given
+        let article = Article.createTestArticle("123")
         let cache = ArticleCache()
 
         /// When
         let scheduler = TestScheduler(initialClock: 0)
         let recorder = scheduler.start {
-            cache.save(Article(articleId: "123"))
+            cache.save(article)
         }
 
         /// Then
-        let expectedArticle = Article(articleId: "123")
+        let expectedArticle = article
         let expected = [
                 next(200, expectedArticle),
                 completed(200)
@@ -156,8 +172,8 @@ class ArticleCacheTest: XCTestCase {
     func test_save_list() {
         /// Given
         let cache = ArticleCache()
-        let testArticle1 = Article(articleId: "1")
-        let testArticle2 = Article(articleId: "2")
+        let testArticle1 = Article.createTestArticle("1")
+        let testArticle2 = Article.createTestArticle("2")
 
         /// When
         let scheduler = TestScheduler(initialClock: 0)
@@ -187,8 +203,8 @@ class ArticleCacheTest: XCTestCase {
 
     func test_delete_id() {
         /// Given
-        let testArticle1 = Article(articleId: "1")
-        let testArticle2 = Article(articleId: "2")
+        let testArticle1 = Article.createTestArticle("1")
+        let testArticle2 = Article.createTestArticle("2")
         var dict = OrderedDictionary<String, Article>()
         dict[testArticle1.key] = testArticle1
         dict[testArticle2.key] = testArticle2
@@ -222,8 +238,8 @@ class ArticleCacheTest: XCTestCase {
 
     func test_delete_value() {
         /// Given
-        let testArticle1 = Article(articleId: "1")
-        let testArticle2 = Article(articleId: "2")
+        let testArticle1 = Article.createTestArticle("1")
+        let testArticle2 = Article.createTestArticle("2")
         var dict = OrderedDictionary<String, Article>()
         dict[testArticle1.key] = testArticle1
         dict[testArticle2.key] = testArticle2
@@ -258,9 +274,9 @@ class ArticleCacheTest: XCTestCase {
 
     func test_deleteAll() {
         /// Given
-        let testArticle1 = Article(articleId: "1")
-        let testArticle2 = Article(articleId: "2")
-        let testArticle3 = Article(articleId: "3")
+        let testArticle1 = Article.createTestArticle("1")
+        let testArticle2 = Article.createTestArticle("2")
+        let testArticle3 = Article.createTestArticle("3")
         var dict = OrderedDictionary<String, Article>()
         dict[testArticle1.key] = testArticle1
         dict[testArticle2.key] = testArticle2
