@@ -11,16 +11,26 @@
 		58C54059424BA112F9BA9115 /* ArticleRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C54B3E5E89B578CBE8DB09 /* ArticleRepository.swift */; };
 		58C540B9D5694E3BFE96BF46 /* SimpleMemCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C5435D255BC1D6D9247E34 /* SimpleMemCache.swift */; };
 		58C5412135A17043CC5B3539 /* OrderedDictionary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58C548E902798F7E7A5C5F29 /* OrderedDictionary.framework */; };
+		58C5412F6BD11FF234E35ECA /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C549B96ADB40D500EF05A8 /* Media.swift */; };
+		58C541AC7BEB102E1F1527DE /* MediaRepositoryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C543F7EF04094BC930A0D1 /* MediaRepositoryTest.swift */; };
+		58C541ADCDC04D2A94A0B14E /* MediaCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C54158180E8EE4FAF1990C /* MediaCache.swift */; };
 		58C542D2F591DDA8E333E4A9 /* ArticleEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C5483046532E077346F3D0 /* ArticleEndpoint.swift */; };
 		58C543741BBEE1B3F31C43D7 /* ArticleCacheTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C541FE2DD6F2E9A322ACCF /* ArticleCacheTest.swift */; };
 		58C5447F01E9752F857C04A0 /* ArticleCloud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C5453AFC70B61CBBC8791D /* ArticleCloud.swift */; };
 		58C54502DC435266E7021C80 /* Collection+empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C54315652A852F262DCD12 /* Collection+empty.swift */; };
 		58C546D3D4B8E71ED57B7593 /* RenderableText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C54741B51E0DC05D1F66EE /* RenderableText.swift */; };
+		58C54710B3F851B552F335BB /* MediaCacheTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C549F22713EC4B6BD476D8 /* MediaCacheTest.swift */; };
+		58C547AEC22A4C1C373E5C9A /* MediaEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C54CDAF8A8B80477EACCB6 /* MediaEndpoint.swift */; };
 		58C548965D2D771DD6177AC2 /* SimpleMemCacheTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C54114FD5064EB33D933C5 /* SimpleMemCacheTest.swift */; };
+		58C5489890A8AEC43E8CADC1 /* MediaRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C54571F7FC8A4D154E08D0 /* MediaRepository.swift */; };
 		58C549303E554A59119C08F4 /* IntIdTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C54D88A79A0564C5DB955F /* IntIdTransform.swift */; };
+		58C549477A54F129E05D196B /* MediaItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C541020CC66CA26DF3B07F /* MediaItem.swift */; };
+		58C54A24B186A0B99D5432F4 /* MediaCloud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C540F2F09089803B35C0BC /* MediaCloud.swift */; };
+		58C54A8D9F27085D8F08DAD4 /* MediaDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C542C2B470CC1FE4C99D43 /* MediaDetails.swift */; };
 		58C54B463CB52DFFD9895651 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C540D1C722829373C877AC /* Article.swift */; };
 		58C54C9EC819CAE3C6DFDA80 /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C54D5A2261773DFFF822D5 /* Resources.swift */; };
 		58C54DD53DB4D8E3952C293A /* ArticleCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C54A0E1F2B46FA8AFCC0FD /* ArticleCache.swift */; };
+		58C54DE5DA27479BEF62A5E0 /* MediaCloudTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C54C4D56E0FAD485640C13 /* MediaCloudTest.swift */; };
 		D6290F881E65DF5F00CBDD2D /* AnyWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6290F871E65DF5F00CBDD2D /* AnyWrapper.swift */; };
 		D6290F8B1E65E1E900CBDD2D /* Observable+ZipWith.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6290F8A1E65E1E900CBDD2D /* Observable+ZipWith.swift */; };
 		D6290F911E69987E00CBDD2D /* test.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D6290F8F1E69987500CBDD2D /* test.bundle */; };
@@ -105,18 +115,28 @@
 
 /* Begin PBXFileReference section */
 		58C540D1C722829373C877AC /* Article.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
+		58C540F2F09089803B35C0BC /* MediaCloud.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaCloud.swift; sourceTree = "<group>"; };
+		58C541020CC66CA26DF3B07F /* MediaItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaItem.swift; sourceTree = "<group>"; };
 		58C54114FD5064EB33D933C5 /* SimpleMemCacheTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleMemCacheTest.swift; sourceTree = "<group>"; };
+		58C54158180E8EE4FAF1990C /* MediaCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaCache.swift; sourceTree = "<group>"; };
 		58C541FE2DD6F2E9A322ACCF /* ArticleCacheTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleCacheTest.swift; sourceTree = "<group>"; };
 		58C5426E014021CD1A0A35CE /* ArticleRepositoryTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleRepositoryTest.swift; sourceTree = "<group>"; };
+		58C542C2B470CC1FE4C99D43 /* MediaDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaDetails.swift; sourceTree = "<group>"; };
 		58C54315652A852F262DCD12 /* Collection+empty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Collection+empty.swift"; sourceTree = "<group>"; };
 		58C5435D255BC1D6D9247E34 /* SimpleMemCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleMemCache.swift; sourceTree = "<group>"; };
+		58C543F7EF04094BC930A0D1 /* MediaRepositoryTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaRepositoryTest.swift; sourceTree = "<group>"; };
 		58C5453AFC70B61CBBC8791D /* ArticleCloud.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleCloud.swift; sourceTree = "<group>"; };
+		58C54571F7FC8A4D154E08D0 /* MediaRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaRepository.swift; sourceTree = "<group>"; };
 		58C54707430BBFD6FAE95B6E /* ArticleCloudTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleCloudTest.swift; sourceTree = "<group>"; };
 		58C54741B51E0DC05D1F66EE /* RenderableText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RenderableText.swift; sourceTree = "<group>"; };
 		58C5483046532E077346F3D0 /* ArticleEndpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleEndpoint.swift; sourceTree = "<group>"; };
 		58C548E902798F7E7A5C5F29 /* OrderedDictionary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OrderedDictionary.framework; path = "/Users/arjan/supersimple.io/duitslandnieuws.nl/swift-app/DuitslandNieuws/Carthage/Build/iOS/OrderedDictionary.framework"; sourceTree = "<absolute>"; };
+		58C549B96ADB40D500EF05A8 /* Media.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
+		58C549F22713EC4B6BD476D8 /* MediaCacheTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaCacheTest.swift; sourceTree = "<group>"; };
 		58C54A0E1F2B46FA8AFCC0FD /* ArticleCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleCache.swift; sourceTree = "<group>"; };
 		58C54B3E5E89B578CBE8DB09 /* ArticleRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleRepository.swift; sourceTree = "<group>"; };
+		58C54C4D56E0FAD485640C13 /* MediaCloudTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaCloudTest.swift; sourceTree = "<group>"; };
+		58C54CDAF8A8B80477EACCB6 /* MediaEndpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaEndpoint.swift; sourceTree = "<group>"; };
 		58C54D5A2261773DFFF822D5 /* Resources.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
 		58C54D88A79A0564C5DB955F /* IntIdTransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntIdTransform.swift; sourceTree = "<group>"; };
 		D6290F871E65DF5F00CBDD2D /* AnyWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnyWrapper.swift; sourceTree = "<group>"; };
@@ -199,11 +219,24 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
+		58C5422C38A53071C7C0221A /* Media */ = {
+			isa = PBXGroup;
+			children = (
+				58C54571F7FC8A4D154E08D0 /* MediaRepository.swift */,
+				58C54158180E8EE4FAF1990C /* MediaCache.swift */,
+				58C540F2F09089803B35C0BC /* MediaCloud.swift */,
+			);
+			path = Media;
+			sourceTree = "<group>";
+		};
 		58C5435A41E43833D489E64E /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				58C540D1C722829373C877AC /* Article.swift */,
 				58C54741B51E0DC05D1F66EE /* RenderableText.swift */,
+				58C549B96ADB40D500EF05A8 /* Media.swift */,
+				58C542C2B470CC1FE4C99D43 /* MediaDetails.swift */,
+				58C541020CC66CA26DF3B07F /* MediaItem.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -213,6 +246,7 @@
 			children = (
 				58C54CEED1672F8120DF1392 /* Article */,
 				58C54114FD5064EB33D933C5 /* SimpleMemCacheTest.swift */,
+				58C546A22C9B19FC78D0DE31 /* Media */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -243,8 +277,19 @@
 			isa = PBXGroup;
 			children = (
 				58C5483046532E077346F3D0 /* ArticleEndpoint.swift */,
+				58C54CDAF8A8B80477EACCB6 /* MediaEndpoint.swift */,
 			);
 			path = Api;
+			sourceTree = "<group>";
+		};
+		58C546A22C9B19FC78D0DE31 /* Media */ = {
+			isa = PBXGroup;
+			children = (
+				58C549F22713EC4B6BD476D8 /* MediaCacheTest.swift */,
+				58C54C4D56E0FAD485640C13 /* MediaCloudTest.swift */,
+				58C543F7EF04094BC930A0D1 /* MediaRepositoryTest.swift */,
+			);
+			path = Media;
 			sourceTree = "<group>";
 		};
 		58C547548C54A8D684E338A1 /* Presentation */ = {
@@ -267,6 +312,7 @@
 			children = (
 				58C54492674D0288E445097C /* Article */,
 				58C5435D255BC1D6D9247E34 /* SimpleMemCache.swift */,
+				58C5422C38A53071C7C0221A /* Media */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -570,7 +616,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Define output file. Change \"$PROJECT_DIR/Tests\" to your test's root source folder, if it's not the default name.\nOUTPUT_FILE=\"$PROJECT_DIR/$TARGET_NAME/Mocks/GeneratedMocks.swift\"\necho \"Generated Mocks File = $OUTPUT_FILE\"\n\n# Define input directory. Change \"$PROJECT_DIR\" to your project's root source folder, if it's not the default name.\nINPUT_DIR=\"$PROJECT_DIR/$PROJECT_NAME\"\necho \"Mocks Input Directory = $INPUT_DIR\"\n\n# Generate mock files, include as many input files as you'd like to create mocks for.\n\"$PROJECT_DIR/Carthage/Checkouts/Cuckoo/run\" generate --testable \"$PROJECT_NAME\" \\\n--exclude \"Cache,Identifiable\" \\\n--output \"${OUTPUT_FILE}\" \\\n\"$INPUT_DIR/Data/Repositories/Article/ArticleCache.swift\" \\\n\"$INPUT_DIR/Data/Repositories/Article/ArticleCloud.swift\" \\\n\"$INPUT_DIR/Data/Repositories/Article/ArticleRepository.swift\" \\\n\"$INPUT_DIR/Data/Repositories/SimpleMemCache.swift\"\n# ... and so forth\n";
+			shellScript = "# Define output file. Change \"$PROJECT_DIR/Tests\" to your test's root source folder, if it's not the default name.\nOUTPUT_FILE=\"$PROJECT_DIR/$TARGET_NAME/Mocks/GeneratedMocks.swift\"\necho \"Generated Mocks File = $OUTPUT_FILE\"\n\n# Define input directory. Change \"$PROJECT_DIR\" to your project's root source folder, if it's not the default name.\nINPUT_DIR=\"$PROJECT_DIR/$PROJECT_NAME\"\necho \"Mocks Input Directory = $INPUT_DIR\"\n\n# Generate mock files, include as many input files as you'd like to create mocks for.\n\"$PROJECT_DIR/Carthage/Checkouts/Cuckoo/run\" generate --testable \"$PROJECT_NAME\" \\\n--exclude \"Cache,Identifiable\" \\\n--output \"${OUTPUT_FILE}\" \\\n\"$INPUT_DIR/Data/Repositories/Article/ArticleCache.swift\" \\\n\"$INPUT_DIR/Data/Repositories/Article/ArticleCloud.swift\" \\\n\"$INPUT_DIR/Data/Repositories/Article/ArticleRepository.swift\" \\\n\"$INPUT_DIR/Data/Repositories/SimpleMemCache.swift\" \\\n\"$INPUT_DIR/Data/Repositories/Media/MediaCloud.swift\" \\\n\"$INPUT_DIR/Data/Repositories/Media/MediaCache.swift\" \\\n\"$INPUT_DIR/Data/Repositories/Media/MediaRepository.swift\"\n# ... and so forth\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -595,6 +641,13 @@
 				D67C44451E6A0B3300BC91E0 /* Observable+ObjectMapper.swift in Sources */,
 				58C546D3D4B8E71ED57B7593 /* RenderableText.swift in Sources */,
 				58C549303E554A59119C08F4 /* IntIdTransform.swift in Sources */,
+				58C5412F6BD11FF234E35ECA /* Media.swift in Sources */,
+				58C54A8D9F27085D8F08DAD4 /* MediaDetails.swift in Sources */,
+				58C549477A54F129E05D196B /* MediaItem.swift in Sources */,
+				58C5489890A8AEC43E8CADC1 /* MediaRepository.swift in Sources */,
+				58C541ADCDC04D2A94A0B14E /* MediaCache.swift in Sources */,
+				58C54A24B186A0B99D5432F4 /* MediaCloud.swift in Sources */,
+				58C547AEC22A4C1C373E5C9A /* MediaEndpoint.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -608,6 +661,9 @@
 				58C543741BBEE1B3F31C43D7 /* ArticleCacheTest.swift in Sources */,
 				58C540146435E539EBB84F0E /* ArticleCloudTest.swift in Sources */,
 				58C54C9EC819CAE3C6DFDA80 /* Resources.swift in Sources */,
+				58C54710B3F851B552F335BB /* MediaCacheTest.swift in Sources */,
+				58C54DE5DA27479BEF62A5E0 /* MediaCloudTest.swift in Sources */,
+				58C541AC7BEB102E1F1527DE /* MediaRepositoryTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

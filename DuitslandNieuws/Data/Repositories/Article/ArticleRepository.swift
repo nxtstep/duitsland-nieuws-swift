@@ -54,11 +54,7 @@ class ArticleRepository {
 
     func clearCaches() -> Observable<Void> {
         return cache.deleteAll().flatMap { _ in
-            Observable<Void>.create { observer in
-                observer.onCompleted()
-
-                return Disposables.create()
-            }
+            Observable.empty()
         }
     }
 }
