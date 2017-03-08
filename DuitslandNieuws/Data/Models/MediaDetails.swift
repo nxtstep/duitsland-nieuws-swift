@@ -24,3 +24,7 @@ extension MediaDetails: ImmutableMappable {
         sizes = try map.value("sizes")
     }
 }
+
+extension MediaDetails {
+    static let empty = MediaDetails(width: 0, height: 0, file: "", sizes: [String: MediaItem]())
+}

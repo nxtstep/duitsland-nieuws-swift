@@ -39,6 +39,10 @@ extension Media: ImmutableMappable {
     }
 }
 
+extension Media {
+    static let empty = Media(id: "", date: Date(), title: RenderableText.empty, author: "", slug: "", caption: RenderableText.empty, details: MediaDetails.empty)
+}
+
 extension Media: Equatable {
 }
 

@@ -10,23 +10,42 @@ import RxTest
 import RxMoya
 @testable import DuitslandNieuws
 
-class MediaRepositoryTest: XCTestCase {
+extension Media {
     static let testItem = Media.createTestMedia("3")
+}
 
-    func test_get() {
-        /// Given
-        let mockCache = MockMediaCache()
+class MediaRepositoryTest: XCTestCase {
+
+    var mockCache: MockMediaCache!
+    var mockCloud: MockMediaCloud!
+
+    override func setUp() {
+        super.setUp()
+
+        mockCache = MockMediaCache()
         stub(mockCache) { stub in
-            when(stub.get(anyString())).thenReturn(Observable.empty())
             when(stub.save(any(Media.self))).then { media in
                         return Observable.just(media)
+                    }
+            when(stub.save(any([Media].self))).then { list in
+                        return Observable.just(list)
                     }
         }
 
         let mockMediaProvider = RxMoyaProvider<MediaEndpoint>()
-        let mockCloud = MockMediaCloud(provider: mockMediaProvider)
+        mockCloud = MockMediaCloud(provider: mockMediaProvider)
+    }
+
+
+    func test_get() {
+        /// Given
+        stub(mockCache) { stub in
+            when(stub.get(anyString())).thenReturn(Observable.empty())
+        }
+
+        /// Cloud
         stub(mockCloud) { stub in
-            when(stub.fetch(id: anyString())).thenReturn(Observable.just(MediaRepositoryTest.testItem))
+            when(stub.fetch(id: anyString())).thenReturn(Observable.just(Media.testItem))
         }
 
         let repo = MediaRepository(mockCache, mockCloud)
@@ -39,94 +58,68 @@ class MediaRepositoryTest: XCTestCase {
 
         /// Then
         let expected = [
-                next(200, MediaRepositoryTest.testItem),
+                next(200, Media.testItem),
                 completed(200)
         ]
         XCTAssertEqual(recorder.events, expected)
 
         verify(mockCache, times(1)).get("123")
-        verify(mockCache, times(1)).save(equal(to: MediaRepositoryTest.testItem))
+        verify(mockCache, times(1)).save(equal(to: Media.testItem))
         verify(mockCloud, times(1)).fetch(id: "123")
     }
 
     func test_save() {
         /// Given
-        let mockCache = MockMediaCache()
-        stub(mockCache) { stub in
-            when(stub.save(any(Media.self))).then { media in
-                        return Observable.just(media)
-                    }
-            when(stub.save(any([Media].self))).then { list in
-                        return Observable.just(list)
-                    }
-        }
-
-        /// Cloud mock
-        let mockMediaProvider = RxMoyaProvider<MediaEndpoint>()
-        let mockCloud = MockMediaCloud(provider: mockMediaProvider)
 
         let repo = MediaRepository(mockCache, mockCloud)
         let scheduler = TestScheduler(initialClock: 0)
 
         /// When
         let recorder = scheduler.start {
-            repo.save(media: MediaRepositoryTest.testItem)
+            repo.save(media: Media.testItem)
         }
 
         /// Then
         let expected = [
-                next(200, MediaRepositoryTest.testItem),
+                next(200, Media.testItem),
                 completed(200)
         ]
         XCTAssertEqual(recorder.events, expected)
 
-        verify(mockCache, times(1)).save(equal(to: MediaRepositoryTest.testItem))
+        verify(mockCache, times(1)).save(equal(to: Media.testItem))
     }
 
     func test_delete() {
         /// Given
-        let mockCache = MockMediaCache()
         stub(mockCache) { stub in
             when(stub.delete(any(Media.self))).then { media in
                         return Observable.just(media)
                     }
-            when(stub.save(any([Media].self))).then { list in
-                        return Observable.just(list)
-                    }
         }
-
-        /// Cloud mock
-        let mockMediaProvider = RxMoyaProvider<MediaEndpoint>()
-        let mockCloud = MockMediaCloud(provider: mockMediaProvider)
 
         let repo = MediaRepository(mockCache, mockCloud)
         let scheduler = TestScheduler(initialClock: 0)
 
         /// When
         let recorder = scheduler.start {
-            repo.delete(media: MediaRepositoryTest.testItem)
+            repo.delete(media: Media.testItem)
         }
 
         /// Then
         let expected = [
-                next(200, MediaRepositoryTest.testItem),
+                next(200, Media.testItem),
                 completed(200)
         ]
         XCTAssertEqual(recorder.events, expected)
 
-        verify(mockCache, times(1)).delete(equal(to: MediaRepositoryTest.testItem))
+        verify(mockCache, times(1)).delete(equal(to: Media.testItem))
     }
 
     func test_clear_caches() {
         /// Given
-        let mockCache = MockMediaCache()
         stub(mockCache) { stub in
             when(stub.deleteAll()).thenReturn(Observable.just([Media]()))
         }
-
-        /// Cloud mock
-        let mockMediaProvider = RxMoyaProvider<MediaEndpoint>()
-        let mockCloud = MockMediaCloud(provider: mockMediaProvider)
 
         let repo = MediaRepository(mockCache, mockCloud)
         let scheduler = TestScheduler(initialClock: 0)

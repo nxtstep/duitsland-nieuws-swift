@@ -10,7 +10,7 @@ import RxTest
 import RxMoya
 @testable import DuitslandNieuws
 
-class ArticleRepositoryTest: XCTestCase {
+extension Article {
     static let testArticle = Article(articleId: "123",
             date: Date(),
             modified: Date(),
@@ -21,21 +21,39 @@ class ArticleRepositoryTest: XCTestCase {
             excerpt: RenderableText(rendered: "Excerpt", protected: true),
             author: "author-id",
             featured_media: "featured-media-id")
+}
 
-    func test_get() {
-        /// Given
-        let mockCache = MockArticleCache()
+class ArticleRepositoryTest: XCTestCase {
+
+    var mockCache: MockArticleCache!
+    var mockCloud: MockArticleCloud!
+
+    override func setUp() {
+        super.setUp()
+        mockCache = MockArticleCache()
         stub(mockCache) { stub in
-            when(stub.get(anyString())).thenReturn(Observable.empty())
             when(stub.save(any(Article.self))).then { article in
                         return Observable.just(article)
                     }
+            when(stub.save(any([Article].self))).then { list in
+                        return Observable.just(list)
+                    }
+            when(stub.deleteAll()).thenReturn(Observable.just([Article]()))
         }
 
         let mockArticleProvider = RxMoyaProvider<ArticleEndpoint>()
-        let mockCloud = MockArticleCloud(provider: mockArticleProvider)
+        mockCloud = MockArticleCloud(provider: mockArticleProvider)
+    }
+
+
+    func test_get() {
+        /// Given
+        stub(mockCache) { stub in
+            when(stub.get(anyString())).thenReturn(Observable.empty())
+        }
+
         stub(mockCloud) { stub in
-            when(stub.fetch(id: anyString())).thenReturn(Observable.just(ArticleRepositoryTest.testArticle))
+            when(stub.fetch(id: anyString())).thenReturn(Observable.just(Article.testArticle))
         }
 
         let repo = ArticleRepository(mockCache, mockCloud)
@@ -48,34 +66,25 @@ class ArticleRepositoryTest: XCTestCase {
 
         /// Then
         let expected = [
-                next(200, ArticleRepositoryTest.testArticle),
+                next(200, Article.testArticle),
                 completed(200)
         ]
         XCTAssertEqual(recorder.events, expected)
 
         verify(mockCache, times(1)).get("123")
-        verify(mockCache, times(1)).save(equal(to: ArticleRepositoryTest.testArticle))
+        verify(mockCache, times(1)).save(equal(to: Article.testArticle))
         verify(mockCloud, times(1)).fetch(id: "123")
     }
 
     func test_list() {
         /// Given
-        let mockCache = MockArticleCache()
         stub(mockCache) { stub in
             when(stub.list(anyInt(), pageSize: anyInt())).thenReturn(Observable.empty())
-            when(stub.save(any(Article.self))).then { article in
-                        return Observable.just(article)
-                    }
-            when(stub.save(any([Article].self))).then { list in
-                        return Observable.just(list)
-                    }
+
         }
 
-
-        let mockArticleProvider = RxMoyaProvider<ArticleEndpoint>()
-        let mockCloud = MockArticleCloud(provider: mockArticleProvider)
         stub(mockCloud) { stub in
-            when(stub.list(anyInt(), pageSize: anyInt())).thenReturn(Observable.from([ArticleRepositoryTest.testArticle]))
+            when(stub.list(anyInt(), pageSize: anyInt())).thenReturn(Observable.from([Article.testArticle]))
         }
 
         let repo = ArticleRepository(mockCache, mockCloud)
@@ -90,7 +99,7 @@ class ArticleRepositoryTest: XCTestCase {
 
         /// Then
         let expected = [
-                next(200, ArticleRepositoryTest.testArticle),
+                next(200, Article.testArticle),
                 completed(200)
         ]
         XCTAssertEqual(recorder.events, expected)
@@ -102,23 +111,13 @@ class ArticleRepositoryTest: XCTestCase {
 
     func test_refresh() {
         /// Given
-        let mockCache = MockArticleCache()
         stub(mockCache) { stub in
             when(stub.list(anyInt(), pageSize: anyInt())).thenReturn(Observable.empty())
-            when(stub.deleteAll()).thenReturn(Observable.just([Article]()))
-            when(stub.save(any(Article.self))).then { article in
-                        return Observable.just(article)
-                    }
-            when(stub.save(any([Article].self))).then { list in
-                        return Observable.just(list)
-                    }
         }
 
         /// Cloud mock
-        let mockArticleProvider = RxMoyaProvider<ArticleEndpoint>()
-        let mockCloud = MockArticleCloud(provider: mockArticleProvider)
         stub(mockCloud) { stub in
-            when(stub.list(anyInt(), pageSize: anyInt())).thenReturn(Observable.from([ArticleRepositoryTest.testArticle]))
+            when(stub.list(anyInt(), pageSize: anyInt())).thenReturn(Observable.from([Article.testArticle]))
         }
 
         let repo = ArticleRepository(mockCache, mockCloud)
@@ -133,7 +132,7 @@ class ArticleRepositoryTest: XCTestCase {
 
         /// Then
         let expected = [
-                next(200, ArticleRepositoryTest.testArticle),
+                next(200, Article.testArticle),
                 completed(200)
         ]
         XCTAssertEqual(recorder.events, expected)
@@ -145,67 +144,41 @@ class ArticleRepositoryTest: XCTestCase {
 
     func test_save() {
         /// Given
-        let mockCache = MockArticleCache()
-        stub(mockCache) { stub in
-            when(stub.save(any(Article.self))).then { article in
-                        return Observable.just(article)
-                    }
-            when(stub.save(any([Article].self))).then { list in
-                        return Observable.just(list)
-                    }
-        }
-
         /// Cloud mock
-        let mockArticleProvider = RxMoyaProvider<ArticleEndpoint>()
-        let mockCloud = MockArticleCloud(provider: mockArticleProvider)
-
         let repo = ArticleRepository(mockCache, mockCloud)
         let scheduler = TestScheduler(initialClock: 0)
 
         /// When
         let recorder = scheduler.start {
-            repo.save(ArticleRepositoryTest.testArticle)
+            repo.save(Article.testArticle)
         }
 
         /// Then
         let expected = [
-                next(200, ArticleRepositoryTest.testArticle),
+                next(200, Article.testArticle),
                 completed(200)
         ]
         XCTAssertEqual(recorder.events, expected)
 
-        verify(mockCache, times(1)).save(equal(to: ArticleRepositoryTest.testArticle))
+        verify(mockCache, times(1)).save(equal(to: Article.testArticle))
     }
 
     func test_save_list() {
-        /// Given
-        let mockCache = MockArticleCache()
-        stub(mockCache) { stub in
-            when(stub.save(any(Article.self))).then { article in
-                        return Observable.just(article)
-                    }
-            when(stub.save(any([Article].self))).then { list in
-                        return Observable.just(list)
-                    }
-        }
-
-        /// Cloud mock
-        let mockArticleProvider = RxMoyaProvider<ArticleEndpoint>()
-        let mockCloud = MockArticleCloud(provider: mockArticleProvider)
+        /// Given - default
 
         let repo = ArticleRepository(mockCache, mockCloud)
         let scheduler = TestScheduler(initialClock: 0)
 
         /// When
         let recorder = scheduler.start {
-            repo.save(list: [ArticleRepositoryTest.testArticle]).flatMap {
+            repo.save(list: [Article.testArticle]).flatMap {
                         Observable.from($0)
                     }
         }
 
         /// Then
         let expected = [
-                next(200, ArticleRepositoryTest.testArticle),
+                next(200, Article.testArticle),
                 completed(200)
         ]
         XCTAssertEqual(recorder.events, expected)
@@ -215,48 +188,32 @@ class ArticleRepositoryTest: XCTestCase {
 
     func test_delete() {
         /// Given
-        let mockCache = MockArticleCache()
         stub(mockCache) { stub in
             when(stub.delete(any(Article.self))).then { article in
                         return Observable.just(article)
                     }
-            when(stub.save(any([Article].self))).then { list in
-                        return Observable.just(list)
-                    }
         }
-
-        /// Cloud mock
-        let mockArticleProvider = RxMoyaProvider<ArticleEndpoint>()
-        let mockCloud = MockArticleCloud(provider: mockArticleProvider)
 
         let repo = ArticleRepository(mockCache, mockCloud)
         let scheduler = TestScheduler(initialClock: 0)
 
         /// When
         let recorder = scheduler.start {
-            repo.delete(ArticleRepositoryTest.testArticle)
+            repo.delete(Article.testArticle)
         }
 
         /// Then
         let expected = [
-                next(200, ArticleRepositoryTest.testArticle),
+                next(200, Article.testArticle),
                 completed(200)
         ]
         XCTAssertEqual(recorder.events, expected)
 
-        verify(mockCache, times(1)).delete(equal(to: ArticleRepositoryTest.testArticle))
+        verify(mockCache, times(1)).delete(equal(to: Article.testArticle))
     }
 
     func test_clear_caches() {
-        /// Given
-        let mockCache = MockArticleCache()
-        stub(mockCache) { stub in
-            when(stub.deleteAll()).thenReturn(Observable.just([Article]()))
-        }
-
-        /// Cloud mock
-        let mockArticleProvider = RxMoyaProvider<ArticleEndpoint>()
-        let mockCloud = MockArticleCloud(provider: mockArticleProvider)
+        /// Given - default
 
         let repo = ArticleRepository(mockCache, mockCloud)
         let scheduler = TestScheduler(initialClock: 0)
