@@ -26,3 +26,8 @@ extension MediaItem: ImmutableMappable {
         sourceUrl = try map.value("source_url")
     }
 }
+
+extension MediaItem {
+    static let IMAGE_THUMBNAIL = "medium"
+    static let IMAGE_FULL = "full"
+}

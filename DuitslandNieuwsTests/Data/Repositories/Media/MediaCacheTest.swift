@@ -24,7 +24,8 @@ extension Media {
 extension MediaDetails {
     static func createTestMedia() -> MediaDetails{
         let item = MediaItem(file: "media_item_small.jpg", width: 5, height:6, mimeType: "mime/jpeg", sourceUrl: "http://image.url.com/image_id/34.jpg")
-        return MediaDetails(width: 10, height: 12, file: "filename.jpg", sizes: ["key": item])
+        let item2 = MediaItem(file: "media_item_full.jpg", width: 599, height:699, mimeType: "mime/jpeg", sourceUrl: "http://image.url.com/image_id/34_big.jpg")
+        return MediaDetails(width: 10, height: 12, file: "filename.jpg", sizes: [MediaItem.IMAGE_THUMBNAIL: item, MediaItem.IMAGE_FULL: item2])
     }
 }
 
