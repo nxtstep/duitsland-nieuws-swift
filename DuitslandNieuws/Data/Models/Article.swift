@@ -46,6 +46,14 @@ extension Article: ImmutableMappable {
     }
 }
 
+extension Date {
+    static let empty = Date(timeIntervalSince1970: 0)
+}
+
+extension Article {
+    static let empty = Article(articleId: "", date: Date.empty, modified: Date.empty, slug: "", link: "", title: RenderableText.empty, content: RenderableText.empty, excerpt: RenderableText.empty, author: "", featured_media: "")
+}
+
 extension Article: Equatable {
 }
 

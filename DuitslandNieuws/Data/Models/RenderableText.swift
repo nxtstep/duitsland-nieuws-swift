@@ -12,6 +12,7 @@ struct RenderableText {
 }
 
 /// Mapping from JSON with ObjectMapper
+
 extension RenderableText: ImmutableMappable {
     init(map: Map) throws {
         rendered = try map.value("rendered")
@@ -19,3 +20,6 @@ extension RenderableText: ImmutableMappable {
     }
 }
 
+extension RenderableText {
+    static let empty = RenderableText(rendered: "", protected: false)
+}
