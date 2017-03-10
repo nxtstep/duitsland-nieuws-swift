@@ -14,9 +14,9 @@ struct ArticlePresentation {
 
     static func from(article: Article, and media: Media, using dateFormatter: DateFormatter) -> ArticlePresentation {
         return ArticlePresentation(articleId: article.articleId,
-                title: article.title.text,
+                title: article.title.rendered,
                 pubDate: dateFormatter.string(from: article.date),
-                excerpt: article.excerpt.text,
+                excerpt: article.excerpt.rendered,
                 imageUrl: media.details.sizes[MediaItem.IMAGE_THUMBNAIL]?.sourceUrl)
     }
 }

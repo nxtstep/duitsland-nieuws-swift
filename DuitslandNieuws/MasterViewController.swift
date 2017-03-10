@@ -17,18 +17,22 @@ let kArticleDetailSegueIdentifier = "articleDetail"
 
 class MasterViewController: RxViewController, ArticleListView {
 
-    @IBOutlet var articleTableView: UITableView!
+    @IBOutlet weak var articleTableView: UITableView!
 
     var detailViewController: DetailViewController? = nil
 
     // TODO Inject
     let articleListViewModel = ArticleListViewModel(mainScheduler: MainScheduler.instance,
-            ioScheduler: ConcurrentDispatchQueueScheduler(qos: .background),
-            interactor: ArticleInteractor(ArticleRepository(ArticleCache(), ArticleCloud(provider: RxMoyaProvider<ArticleEndpoint>())), MediaRepository(MediaCache(), MediaCloud(provider: RxMoyaProvider<MediaEndpoint>()))))
+            ioScheduler: SerialDispatchQueueScheduler(qos: .background),
+            interactor: ArticleInteractor(ArticleRepository(ArticleCache(), ArticleCloud(provider: RxMoyaProvider<ArticleEndpoint>())),
+                    MediaRepository(MediaCache(), MediaCloud(provider: RxMoyaProvider<MediaEndpoint>()))))
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        articleTableView.estimatedRowHeight = 140
+        articleTableView.rowHeight = UITableViewAutomaticDimension
+        
         if let split = self.splitViewController {
             let controllers = split.viewControllers
             self.detailViewController = (controllers[controllers.count - 1] as! UINavigationController).topViewController as? DetailViewController
@@ -53,9 +57,9 @@ class MasterViewController: RxViewController, ArticleListView {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == kArticleDetailSegueIdentifier {
             if let indexPath = self.articleTableView.indexPathForSelectedRow {
-                let articleId = articleListViewModel[indexPath.row].articleId
+                let article = articleListViewModel[indexPath.row]
                 let controller = (segue.destination as! UINavigationController).topViewController as! DetailViewController
-                controller.articleId = articleId
+                controller.articleId = article.articleId
                 controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem
                 controller.navigationItem.leftItemsSupplementBackButton = true
             }
@@ -66,7 +70,8 @@ class MasterViewController: RxViewController, ArticleListView {
 
     var loading: Bool = false {
         didSet {
-            //TODO - show/hide loading indicator
+            // show/hide loading indicator
+            UIApplication.shared.isNetworkActivityIndicatorVisible = loading
         }
     }
     var error: Error? = nil {

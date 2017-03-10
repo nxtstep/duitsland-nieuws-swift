@@ -8,11 +8,7 @@ import ObjectMapper
 
 struct RenderableText {
     let rendered: String
-    let protected: Bool
-
-    var text: String {
-        return rendered // TODO format HTML elements
-    }
+    let protected: Bool    
 }
 
 /// Mapping from JSON with ObjectMapper
