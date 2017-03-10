@@ -89,7 +89,7 @@ class ArticleListViewModelTest: XCTestCase {
         _ = viewModel.list.bindTo(presentationList)
         viewModel.bind(view: mockListView)
         scheduler.start()
-        viewModel.refresh()   //FIXME Clear doesn't work
+        viewModel.refresh()
         scheduler.start()
         viewModel.unbind()
 
