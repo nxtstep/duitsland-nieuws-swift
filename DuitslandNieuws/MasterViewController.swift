@@ -103,6 +103,7 @@ class MasterViewController: RxViewController, ArticleListView {
 
     // MARK: - Rx
     override func setupRx() {
+        /// Bind list items to table
         articleListViewModel.list
                 .observeOn(MainScheduler.instance)
                 .bindTo(articleTableView.rx.items) { (tableView, row, articlePresentation) in
@@ -111,6 +112,17 @@ class MasterViewController: RxViewController, ArticleListView {
 
                     return cell
                 }
+                .disposed(by: disposeBag)
+
+        /// Bind content offset to load more trigger
+        articleTableView.rx.contentOffset
+                .throttle(0.5, scheduler: MainScheduler.instance)
+                .filter { [unowned self] offset in
+                    return (offset.y + self.articleTableView.frame.size.height + 50 > self.articleTableView.contentSize.height)
+                }
+                .subscribe(onNext: { [unowned self] offset in
+                    self.articleListViewModel.loadNextPage()
+                })
                 .disposed(by: disposeBag)
     }
 }

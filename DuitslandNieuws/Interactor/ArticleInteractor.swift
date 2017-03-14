@@ -26,7 +26,7 @@ class ArticleInteractor {
         return articleRepository.list(page, pageSize: pageSize)
                 .flatMap {
                     Observable.from($0)
-                            .flatMap { [unowned self] in
+                            .concatMap { [unowned self] in
                                 self.mergeWithMedia(article: $0)
                             }
                 }
@@ -36,7 +36,7 @@ class ArticleInteractor {
         return articleRepository.refresh(pageSize)
                 .flatMap {
                     Observable.from($0)
-                            .flatMap { [unowned self] in
+                            .concatMap { [unowned self] in
                                 self.mergeWithMedia(article: $0)
                             }
                 }
