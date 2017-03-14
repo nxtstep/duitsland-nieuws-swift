@@ -19,6 +19,12 @@ class MasterViewController: RxViewController, ArticleListView {
 
     @IBOutlet weak var articleTableView: UITableView!
 
+    lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(handleRefresh(_:)), for: UIControlEvents.valueChanged)
+        return refreshControl
+    }()
+
     var detailViewController: DetailViewController? = nil
 
     // TODO Inject
@@ -32,7 +38,8 @@ class MasterViewController: RxViewController, ArticleListView {
 
         articleTableView.estimatedRowHeight = 140
         articleTableView.rowHeight = UITableViewAutomaticDimension
-        
+        articleTableView.addSubview(self.refreshControl)
+
         if let split = self.splitViewController {
             let controllers = split.viewControllers
             self.detailViewController = (controllers[controllers.count - 1] as! UINavigationController).topViewController as? DetailViewController
@@ -50,6 +57,12 @@ class MasterViewController: RxViewController, ArticleListView {
     override func viewWillDisappear(_ animated: Bool) {
         articleListViewModel.unbind()
         super.viewWillDisappear(animated)
+    }
+
+    func handleRefresh(_ control: UIRefreshControl) {
+        if control == self.refreshControl {
+            articleListViewModel.refresh()
+        }
     }
 
     // MARK: - Segues
@@ -72,11 +85,19 @@ class MasterViewController: RxViewController, ArticleListView {
         didSet {
             // show/hide loading indicator
             UIApplication.shared.isNetworkActivityIndicatorVisible = loading
+            if loading {
+                self.refreshControl.beginRefreshing()
+            } else {
+                self.refreshControl.endRefreshing()
+            }
         }
     }
     var error: Error? = nil {
         didSet {
-           // TODO display error
+            // TODO display error
+            if let error = error {
+                self.refreshControl.endRefreshing()
+            }
         }
     }
 

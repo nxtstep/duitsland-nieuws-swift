@@ -75,9 +75,6 @@ class ArticleListViewModel {
         articleInteractor.list(page: page, pageSize: pageSize)
                 .do(onCompleted: { [unowned self] in self.stateSubject.onNext(LoadingState.FINISHED) },
                         onSubscribe: { [unowned self] in self.stateSubject.onNext(LoadingState.LOADING) })
-                .flatMap {
-                    Observable.from($0)
-                }
                 .map { [unowned self] in
                     ArticleListViewModel.convertToPresentation(article: $0.0, media: $0.1, dateFormatter: self.dateFormatter)
                 }
@@ -107,9 +104,6 @@ class ArticleListViewModel {
                             self.articleList.value = [ArticlePresentation]() // clear
                         }
                 )
-                .flatMap {
-                    Observable.from($0)
-                }
                 .map { [unowned self] in
                     ArticleListViewModel.convertToPresentation(article: $0.0, media: $0.1, dateFormatter: self.dateFormatter)
                 }

@@ -12,6 +12,9 @@ github "Moya/Moya" ~> 8.0
 github "Hearst-DD/ObjectMapper" ~> 2.2
 github "Alamofire/AlamofireImage" ~> 3.1
 #
+# UI
+github "optonaut/ActiveLabel.swift"
+#
 # Test Dependencies
 #
 # Cuckoo - Mockito for Swift

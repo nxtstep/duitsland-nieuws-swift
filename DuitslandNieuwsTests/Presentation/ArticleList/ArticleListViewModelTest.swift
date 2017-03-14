@@ -58,11 +58,11 @@ class ArticleListViewModelTest: XCTestCase {
         XCTAssertEqual(presentationList.value.count, 1)
         let presentation = presentationList.value[0]
         XCTAssertEqual(presentation.articleId, Article.testArticle.articleId)
-        XCTAssertEqual(presentation.excerpt, Article.testArticle.excerpt.text)
+        XCTAssertEqual(presentation.excerpt, Article.testArticle.excerpt.rendered)
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = dateFormat
         XCTAssertEqual(presentation.pubDate, dateFormatter.string(from: Article.testArticle.date))
-        XCTAssertEqual(presentation.title, Article.testArticle.title.text)
+        XCTAssertEqual(presentation.title, Article.testArticle.title.rendered)
         XCTAssertEqual(presentation.imageUrl, Media.testItem.details.sizes[MediaItem.IMAGE_THUMBNAIL]?.sourceUrl)
         XCTAssertEqual(presentation.imageUrl, "http://image.url.com/image_id/34.jpg")
     }
