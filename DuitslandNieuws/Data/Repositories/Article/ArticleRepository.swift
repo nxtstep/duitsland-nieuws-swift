@@ -19,7 +19,7 @@ class ArticleRepository {
 
     func list(_ page: Int = 0, pageSize size: Int = defaultPageSize) -> Observable<[Article]> {
         return cache.list(page, pageSize: size)
-                .ifEmpty(switchTo: cloud.list(0, pageSize: size)
+                .ifEmpty(switchTo: cloud.list(page, pageSize: size)
                         .flatMap { [unowned self] in
                             self.cache.save($0)
                         })

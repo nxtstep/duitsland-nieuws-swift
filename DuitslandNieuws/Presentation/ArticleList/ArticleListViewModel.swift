@@ -101,16 +101,16 @@ class ArticleListViewModel {
                         },
                         onSubscribe: { [unowned self] in
                             self.stateSubject.onNext(LoadingState.LOADING)
-                            self.articleList.value = [ArticlePresentation]() // clear
                         }
                 )
                 .map { [unowned self] in
                     ArticleListViewModel.convertToPresentation(article: $0.0, media: $0.1, dateFormatter: self.dateFormatter)
                 }
+                .toArray()
                 .subscribeOn(ioScheduler)
                 .observeOn(mainScheduler)
-                .subscribe(onNext: { [unowned self] item in
-                    self.articleList.value += [item]
+                .subscribe(onNext: { [unowned self] list in
+                    self.articleList.value = list
                 }, onError: { [unowned self] error in
                     self.view?.error = error
                 }, onCompleted: { [unowned self] in
