@@ -21,17 +21,18 @@ class DetailViewController: RxViewController, ArticleDetailView {
 
     var articleId: String!
 
-    // TODO Inject
+    // Inject
+    var schedulerProvider: SchedulerProvider!
+    var articleInteractor: ArticleInteractor!
     var articlePresenter: ArticleDetailPresenter!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         articlePresenter = ArticleDetailPresenter(id: articleId,
-                interactor: ArticleInteractor(ArticleRepository(ArticleCache(), ArticleCloud(provider: RxMoyaProvider<ArticleEndpoint>())),
-                        MediaRepository(MediaCache(), MediaCloud(provider: RxMoyaProvider<MediaEndpoint>()))),
-                mainScheduler: MainScheduler.instance,
-                ioScheduler: SerialDispatchQueueScheduler(qos: .background))
+                interactor: articleInteractor,
+                mainScheduler: schedulerProvider.main,
+                ioScheduler: schedulerProvider.io)
     }
 
     override func viewWillAppear(_ animated: Bool) {
