@@ -27,13 +27,17 @@ class MasterViewController: RxViewController, ArticleListView {
 
     var detailViewController: DetailViewController? = nil
 
-    // TODO Inject
-    let articleListViewModel = ArticleListViewModel(mainScheduler: MainScheduler.instance,
-            ioScheduler: SerialDispatchQueueScheduler(qos: .background),
-            interactor: ArticleInteractor(ArticleRepository(ArticleCache(), ArticleCloud(provider: RxMoyaProvider<ArticleEndpoint>())),
-                    MediaRepository(MediaCache(), MediaCloud(provider: RxMoyaProvider<MediaEndpoint>()))))
+    // Inject
+    var schedulerProvider: SchedulerProvider!
+    var articleInteractor: ArticleInteractor!
+    var articleListViewModel: ArticleListViewModel!
 
     override func viewDidLoad() {
+        articleListViewModel = ArticleListViewModel(
+                mainScheduler: schedulerProvider.main,
+                ioScheduler: schedulerProvider.io,
+                interactor: articleInteractor)
+        
         super.viewDidLoad()
 
         articleTableView.estimatedRowHeight = 140
@@ -95,7 +99,7 @@ class MasterViewController: RxViewController, ArticleListView {
     var error: Error? = nil {
         didSet {
             // TODO display error
-            if let error = error {
+            if let _ = error {
                 self.refreshControl.endRefreshing()
             }
         }

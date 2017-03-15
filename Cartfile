@@ -4,6 +4,10 @@
 # RxSwift
 github "ReactiveX/RxSwift" ~> 3.0
 #
+# Dependency injection
+github "Swinject/Swinject" "2.0.0"
+github "Swinject/SwinjectStoryboard" "1.0.0"
+#
 # Dictionary that keeps track of sort order
 github "lukaskubanek/OrderedDictionary" ~> 1.0
 #
