@@ -8,8 +8,6 @@
 
 import UIKit
 import RxSwift
-import RxCocoa
-import RxMoya
 
 
 let kArticleCellIdentifier = "ArticleCellIdentifier"
@@ -37,17 +35,13 @@ class MasterViewController: RxViewController, ArticleListView {
                 mainScheduler: schedulerProvider.main,
                 ioScheduler: schedulerProvider.io,
                 interactor: articleInteractor)
-        
+
         super.viewDidLoad()
 
         articleTableView.estimatedRowHeight = 140
         articleTableView.rowHeight = UITableViewAutomaticDimension
         articleTableView.addSubview(self.refreshControl)
 
-        if let split = self.splitViewController {
-            let controllers = split.viewControllers
-            self.detailViewController = (controllers[controllers.count - 1] as! UINavigationController).topViewController as? DetailViewController
-        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -75,10 +69,11 @@ class MasterViewController: RxViewController, ArticleListView {
         if segue.identifier == kArticleDetailSegueIdentifier {
             if let indexPath = self.articleTableView.indexPathForSelectedRow {
                 let article = articleListViewModel[indexPath.row]
-                let controller = (segue.destination as! UINavigationController).topViewController as! DetailViewController
+                let controller = segue.destination as! DetailViewController
                 controller.articleId = article.articleId
-                controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem
-                controller.navigationItem.leftItemsSupplementBackButton = true
+                let backItem = UIBarButtonItem()
+                backItem.title = ""
+                navigationItem.backBarButtonItem = backItem
             }
         }
     }

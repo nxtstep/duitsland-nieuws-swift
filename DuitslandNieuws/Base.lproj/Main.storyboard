@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="H1p-Uh-vWS">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="RMx-3f-FxP">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -40,11 +40,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vjb-nL-iLX">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jVx-MU-pwJ">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hHw-Np-dLH" userLabel="Content View">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="305"/>
@@ -129,12 +129,12 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="Vjb-nL-iLX" secondAttribute="trailing" id="06i-lZ-YaL"/>
+                            <constraint firstItem="Vjb-nL-iLX" firstAttribute="top" secondItem="svH-Pt-448" secondAttribute="top" id="5fp-6f-KWS"/>
                             <constraint firstItem="GAO-Cl-Wes" firstAttribute="top" secondItem="Vjb-nL-iLX" secondAttribute="bottom" id="DVR-1z-Ffw"/>
                             <constraint firstItem="GAO-Cl-Wes" firstAttribute="top" secondItem="jVx-MU-pwJ" secondAttribute="bottom" id="GY7-HZ-6WW"/>
                             <constraint firstItem="jVx-MU-pwJ" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leading" id="OWH-uX-XYf"/>
-                            <constraint firstItem="Vjb-nL-iLX" firstAttribute="top" secondItem="SYR-Wa-9uf" secondAttribute="bottom" id="ZRq-yD-kHV"/>
-                            <constraint firstItem="jVx-MU-pwJ" firstAttribute="top" secondItem="SYR-Wa-9uf" secondAttribute="bottom" id="cLZ-Pd-Kvd"/>
                             <constraint firstAttribute="trailing" secondItem="jVx-MU-pwJ" secondAttribute="trailing" id="fi3-Eq-BkT"/>
+                            <constraint firstItem="jVx-MU-pwJ" firstAttribute="top" secondItem="svH-Pt-448" secondAttribute="top" id="mqB-83-6AF"/>
                             <constraint firstItem="Vjb-nL-iLX" firstAttribute="width" secondItem="hHw-Np-dLH" secondAttribute="width" id="qjT-HD-xUD"/>
                             <constraint firstItem="Vjb-nL-iLX" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leading" id="wDu-i9-9oV"/>
                         </constraints>
@@ -145,6 +145,7 @@
                         <outlet property="captionLabel" destination="XhW-hR-lJU" id="9Oq-dK-YOb"/>
                         <outlet property="dateLabel" destination="1Si-uz-Buh" id="Uzr-im-w0f"/>
                         <outlet property="imageView" destination="eqz-lh-7nj" id="f4p-1u-Ttp"/>
+                        <outlet property="scrollView" destination="jVx-MU-pwJ" id="Tkx-3Q-aRW"/>
                         <outlet property="textLabel" destination="oZj-sS-5dF" id="eaE-vS-qiK"/>
                         <outlet property="titleLabel" destination="Xzj-vi-0uS" id="wuC-O1-NyI"/>
                     </connections>
@@ -152,20 +153,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FJe-Yq-33r" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="708" y="128.18590704647679"/>
-        </scene>
-        <!--Split View Controller-->
-        <scene sceneID="Nki-YV-4Qg">
-            <objects>
-                <splitViewController id="H1p-Uh-vWS" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <connections>
-                        <segue destination="RMx-3f-FxP" kind="relationship" relationship="masterViewController" id="BlO-5A-QYV"/>
-                        <segue destination="vC3-pB-5Vb" kind="relationship" relationship="detailViewController" id="Tll-UG-LXB"/>
-                    </connections>
-                </splitViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="cZU-Oi-B1e" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-856" y="-330"/>
         </scene>
         <!--Master-->
         <scene sceneID="smW-Zh-WAh">
@@ -250,7 +237,7 @@
                                     <outlet property="excerptLabel" destination="aVh-O6-rdi" id="kXe-eD-fJ8"/>
                                     <outlet property="thumbnailImageView" destination="GCT-Fa-X45" id="yMR-y9-U8h"/>
                                     <outlet property="titleLabel" destination="imc-sj-bYc" id="rUd-97-dLS"/>
-                                    <segue destination="vC3-pB-5Vb" kind="showDetail" identifier="articleDetail" id="6S0-TO-JiA"/>
+                                    <segue destination="JEX-9P-axG" kind="show" identifier="articleDetail" id="XVf-Of-HWK"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -265,24 +252,5 @@
             </objects>
             <point key="canvasLocation" x="708" y="-630.13493253373315"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="r7l-gg-dq7">
-            <objects>
-                <navigationController id="vC3-pB-5Vb" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="DjV-YW-jjY">
-                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="JEX-9P-axG" kind="relationship" relationship="rootViewController" id="GKi-kA-LjT"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="SLD-UC-DBI" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-45" y="129"/>
-        </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="6S0-TO-JiA"/>
-    </inferredMetricsTieBreakers>
 </document>
