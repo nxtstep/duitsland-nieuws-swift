@@ -18,6 +18,7 @@ github "Alamofire/AlamofireImage" ~> 3.1
 #
 # UI
 github "optonaut/ActiveLabel.swift"
+github "ltebean/LTNavigationBar" ~> 2.1
 #
 # Test Dependencies
 #
