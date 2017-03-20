@@ -14,36 +14,47 @@ public protocol Identifiable {
 }
 
 public protocol Cache {
-    associatedtype K: Hashable
-    associatedtype V: Identifiable
+    associatedtype E: Identifiable
 
-    func get(_ id: K) -> Observable<V>
+    func get(_ id: E.K) -> Observable<E>
 
-    func list(_ page: Int, pageSize size: Int) -> Observable<[V]>
+    func list(_ page: Int, pageSize size: Int) -> Observable<[E]>
 
-    func listAll() -> Observable<[V]>
+    func listAll() -> Observable<[E]>
 
-    func save(_ value: V) -> Observable<V>
+    func save(_ value: E) -> Observable<E>
 
-    func save(_ values: [V]) -> Observable<[V]>
+    func save(_ values: [E]) -> Observable<[E]>
 
-    func delete(id: K) -> Observable<V>
+    func delete(id: E.K) -> Observable<E>
 
-    func delete(_ value: V) -> Observable<V>
+    func delete(_ value: E) -> Observable<E>
 
-    func deleteAll() -> Observable<[V]>
+    func deleteAll() -> Observable<[E]>
 }
 
-public struct SimpleMemCache<K:Hashable, V:Identifiable>: Cache {
-    public init(values dict: OrderedDictionary<K, V> = OrderedDictionary<K, V>()) {
-        self.cache = AnyMutableWrapper(dict)
+public struct ObservableMemCache<Element:Identifiable>: Cache {
+
+    public init(values dict: [Element.K: Element]) {
+        self.cache = AnyMutableWrapper(OrderedDictionary(dict))
     }
 
-    internal func generateKey(_ value: V) -> Observable<K> {
-        return Observable.just(value.key as! K)
+    public init() {
+        self.cache = AnyMutableWrapper(OrderedDictionary())
     }
 
-    public func get(_ id: K) -> Observable<V> {
+    public init(_ elements: [Element]) {
+        let sequence = elements.flatMap {
+            (key: $0.key, value: $0)
+        }
+        self.cache = AnyMutableWrapper(OrderedDictionary(sequence))
+    }
+
+    internal func generateKey(_ value: Element) -> Observable<Element.K> {
+        return Observable.just(value.key)
+    }
+
+    public func get(_ id: Element.K) -> Observable<Element> {
         return Observable.just(self.cache.value)
                 .filter {
                     $0[id] != nil
@@ -53,7 +64,7 @@ public struct SimpleMemCache<K:Hashable, V:Identifiable>: Cache {
                 }
     }
 
-    public func list(_ page: Int, pageSize size: Int) -> Observable<[V]> {
+    public func list(_ page: Int, pageSize size: Int) -> Observable<[Element]> {
         return Observable.just(self.cache.value)
                 .filter {
                     $0.isNotEmpty
@@ -69,7 +80,7 @@ public struct SimpleMemCache<K:Hashable, V:Identifiable>: Cache {
                 }
     }
 
-    public func listAll() -> Observable<[V]> {
+    public func listAll() -> Observable<[Element]> {
         return Observable.just(self.cache.value)
                 .filter {
                     $0.isNotEmpty
@@ -80,18 +91,17 @@ public struct SimpleMemCache<K:Hashable, V:Identifiable>: Cache {
                 .toArray()
     }
 
-    public func save(_ value: V) -> Observable<V> {
+    public func save(_ value: Element) -> Observable<Element> {
         return generateKey(value)
                 .zip(with: Observable.just(value)) {
                     ($0, $1)
                 }
                 .map { pair in
-                    self.cache.value[pair.0] = pair.1
-                    return pair.1
+                    self._save(pair.1, for: pair.0)
                 }
     }
 
-    public func save(_ values: [V]) -> Observable<[V]> {
+    public func save(_ values: [Element]) -> Observable<[Element]> {
         return Observable.from(values)
                 .flatMap {
                     self.save($0)
@@ -99,21 +109,21 @@ public struct SimpleMemCache<K:Hashable, V:Identifiable>: Cache {
                 .toArray()
     }
 
-    public func delete(id: K) -> Observable<V> {
+    public func delete(id: Element.K) -> Observable<Element> {
         return self.get(id)
                 .map { _ in
-                    self.cache.value.removeValue(forKey: id)!
+                    self._delete(id: id)!
                 }
     }
 
-    public func delete(_ value: V) -> Observable<V> {
+    public func delete(_ value: Element) -> Observable<Element> {
         return self.generateKey(value)
                 .flatMap {
                     self.delete(id: $0)
                 }
     }
 
-    public func deleteAll() -> Observable<[V]> {
+    public func deleteAll() -> Observable<[Element]> {
         return listAll()
                 .flatMap {
                     Observable.from($0)
@@ -128,6 +138,15 @@ public struct SimpleMemCache<K:Hashable, V:Identifiable>: Cache {
         cache.value.removeAll()
     }
 
-    internal let cache: AnyMutableWrapper<OrderedDictionary<K, V>>
+    fileprivate func _delete(id: Element.K) -> Element? {
+        return cache.value.removeValue(forKey: id)
+    }
+
+    fileprivate func _save(_ value: Element, for key: Element.K) -> Element {
+        cache.value[key] = value
+        return value
+    }
+
+    internal let cache: AnyMutableWrapper<OrderedDictionary<Element.K, Element>>
 }
 

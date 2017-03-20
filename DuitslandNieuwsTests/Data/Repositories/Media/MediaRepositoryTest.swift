@@ -25,11 +25,11 @@ class MediaRepositoryTest: XCTestCase {
         mockCache = MockMediaCache()
         stub(mockCache) { stub in
             when(stub.save(any(Media.self))).then { media in
-                        return Observable.just(media)
-                    }
+                return Observable.just(media)
+            }
             when(stub.save(any([Media].self))).then { list in
-                        return Observable.just(list)
-                    }
+                return Observable.just(list)
+            }
         }
 
         let mockMediaProvider = RxMoyaProvider<MediaEndpoint>()
@@ -93,8 +93,8 @@ class MediaRepositoryTest: XCTestCase {
         /// Given
         stub(mockCache) { stub in
             when(stub.delete(any(Media.self))).then { media in
-                        return Observable.just(media)
-                    }
+                return Observable.just(media)
+            }
         }
 
         let repo = MediaRepository(mockCache, mockCloud)

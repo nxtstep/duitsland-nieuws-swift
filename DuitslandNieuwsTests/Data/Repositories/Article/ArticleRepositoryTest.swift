@@ -33,11 +33,11 @@ class ArticleRepositoryTest: XCTestCase {
         mockCache = MockArticleCache()
         stub(mockCache) { stub in
             when(stub.save(any(Article.self))).then { article in
-                        return Observable.just(article)
-                    }
+                return Observable.just(article)
+            }
             when(stub.save(any([Article].self))).then { list in
-                        return Observable.just(list)
-                    }
+                return Observable.just(list)
+            }
             when(stub.deleteAll()).thenReturn(Observable.just([Article]()))
         }
 
@@ -84,7 +84,7 @@ class ArticleRepositoryTest: XCTestCase {
         }
 
         stub(mockCloud) { stub in
-            when(stub.list(anyInt(), pageSize: anyInt())).thenReturn(Observable.from([Article.testArticle]))
+            when(stub.list(anyInt(), pageSize: anyInt())).thenReturn(Observable.from(optional: [Article.testArticle]))
         }
 
         let repo = ArticleRepository(mockCache, mockCloud)
@@ -93,8 +93,8 @@ class ArticleRepositoryTest: XCTestCase {
         /// When
         let recorder = scheduler.start {
             repo.list(0, pageSize: 4).flatMap {
-                        Observable.from($0)
-                    }
+                Observable.from($0)
+            }
         }
 
         /// Then
@@ -117,7 +117,7 @@ class ArticleRepositoryTest: XCTestCase {
 
         /// Cloud mock
         stub(mockCloud) { stub in
-            when(stub.list(anyInt(), pageSize: anyInt())).thenReturn(Observable.from([Article.testArticle]))
+            when(stub.list(anyInt(), pageSize: anyInt())).thenReturn(Observable.from(optional: [Article.testArticle]))
         }
 
         let repo = ArticleRepository(mockCache, mockCloud)
@@ -126,8 +126,8 @@ class ArticleRepositoryTest: XCTestCase {
         /// When
         let recorder = scheduler.start {
             repo.refresh(3).flatMap {
-                        Observable.from($0)
-                    }
+                Observable.from($0)
+            }
         }
 
         /// Then
@@ -172,8 +172,8 @@ class ArticleRepositoryTest: XCTestCase {
         /// When
         let recorder = scheduler.start {
             repo.save(list: [Article.testArticle]).flatMap {
-                        Observable.from($0)
-                    }
+                Observable.from($0)
+            }
         }
 
         /// Then
@@ -190,8 +190,8 @@ class ArticleRepositoryTest: XCTestCase {
         /// Given
         stub(mockCache) { stub in
             when(stub.delete(any(Article.self))).then { article in
-                        return Observable.just(article)
-                    }
+                return Observable.just(article)
+            }
         }
 
         let repo = ArticleRepository(mockCache, mockCloud)
