@@ -6,7 +6,6 @@
 import XCTest
 import RxSwift
 import RxTest
-import OrderedDictionary
 @testable import DuitslandNieuws
 
 extension Article {
@@ -29,9 +28,7 @@ class ArticleCacheTest: XCTestCase {
     func test_get() {
         /// Given
         let testArticle = Article.createTestArticle("123")
-        var dict = OrderedDictionary<String, Article>()
-        dict[testArticle.key] = testArticle
-        let cache = ArticleCache(values: dict)
+        let cache = ArticleCache([testArticle])
 
         /// When - wrong id
         let scheduler = TestScheduler(initialClock: 0)
@@ -63,10 +60,7 @@ class ArticleCacheTest: XCTestCase {
         /// Given
         let testArticle1 = Article.createTestArticle("1")
         let testArticle2 = Article.createTestArticle("2")
-        var dict = OrderedDictionary<String, Article>()
-        dict[testArticle1.key] = testArticle1
-        dict[testArticle2.key] = testArticle2
-        let cache = ArticleCache(values: dict)
+        let cache = ArticleCache([testArticle1, testArticle2])
 
         /// When
         let scheduler = TestScheduler(initialClock: 0)
@@ -121,10 +115,7 @@ class ArticleCacheTest: XCTestCase {
         /// Given
         let testArticle1 = Article.createTestArticle("1")
         let testArticle2 = Article.createTestArticle("2")
-        var dict = OrderedDictionary<String, Article>()
-        dict[testArticle1.key] = testArticle1
-        dict[testArticle2.key] = testArticle2
-        let cache = ArticleCache(values: dict)
+        let cache = ArticleCache([testArticle1, testArticle2])
 
         /// When
         let scheduler = TestScheduler(initialClock: 0)
@@ -205,10 +196,7 @@ class ArticleCacheTest: XCTestCase {
         /// Given
         let testArticle1 = Article.createTestArticle("1")
         let testArticle2 = Article.createTestArticle("2")
-        var dict = OrderedDictionary<String, Article>()
-        dict[testArticle1.key] = testArticle1
-        dict[testArticle2.key] = testArticle2
-        let cache = ArticleCache(values: dict)
+        let cache = ArticleCache([testArticle1, testArticle2])
 
         /// When
         let scheduler = TestScheduler(initialClock: 0)
@@ -240,10 +228,7 @@ class ArticleCacheTest: XCTestCase {
         /// Given
         let testArticle1 = Article.createTestArticle("1")
         let testArticle2 = Article.createTestArticle("2")
-        var dict = OrderedDictionary<String, Article>()
-        dict[testArticle1.key] = testArticle1
-        dict[testArticle2.key] = testArticle2
-        let cache = ArticleCache(values: dict)
+        let cache = ArticleCache([testArticle1, testArticle2])
 
         /// When
         let scheduler = TestScheduler(initialClock: 0)
@@ -277,11 +262,7 @@ class ArticleCacheTest: XCTestCase {
         let testArticle1 = Article.createTestArticle("1")
         let testArticle2 = Article.createTestArticle("2")
         let testArticle3 = Article.createTestArticle("3")
-        var dict = OrderedDictionary<String, Article>()
-        dict[testArticle1.key] = testArticle1
-        dict[testArticle2.key] = testArticle2
-        dict[testArticle3.key] = testArticle3
-        let cache = ArticleCache(values: dict)
+        let cache = ArticleCache([testArticle1, testArticle2, testArticle3])
 
         /// When
         let scheduler = TestScheduler(initialClock: 0)

@@ -15,11 +15,11 @@ extension String: Identifiable {
     }
 }
 
-class SimpleMemCacheTest: XCTestCase {
+class ObservableMemCacheTest: XCTestCase {
 
     func test_get() {
         /// Given
-        let cache = SimpleMemCache<String, String>()
+        let cache = ObservableMemCache<String>()
         cache.cache.value["test-id".key] = "test-id"
 
         /// When - wrong id
@@ -50,7 +50,7 @@ class SimpleMemCacheTest: XCTestCase {
 
     func test_list() {
         /// Given
-        let cache = SimpleMemCache<String, String>()
+        let cache = ObservableMemCache<String>()
         cache.cache.value["test-value-1".key] = "test-value-1"
         cache.cache.value["test-value-2".key] = "test-value-2"
 
@@ -105,7 +105,7 @@ class SimpleMemCacheTest: XCTestCase {
 
     func test_list_all() {
         /// Given
-        let cache = SimpleMemCache<String, String>()
+        let cache = ObservableMemCache<String>()
         cache.cache.value["test-value-1".key] = "test-value-1"
         cache.cache.value["test-value-2".key] = "test-value-2"
 
@@ -129,7 +129,7 @@ class SimpleMemCacheTest: XCTestCase {
 
     func test_save() {
         /// Given
-        let cache = SimpleMemCache<String, String>()
+        let cache = ObservableMemCache<String>()
 
         /// When
         let scheduler = TestScheduler(initialClock: 0)
@@ -148,7 +148,7 @@ class SimpleMemCacheTest: XCTestCase {
 
     func test_save_list() {
         /// Given
-        let cache = SimpleMemCache<String, String>()
+        let cache = ObservableMemCache<String>()
 
         /// When
         let scheduler = TestScheduler(initialClock: 0)
@@ -172,7 +172,7 @@ class SimpleMemCacheTest: XCTestCase {
 
     func test_delete_id() {
         /// Given
-        let cache = SimpleMemCache<String, String>()
+        let cache = ObservableMemCache<String>()
         cache.cache.value["test-value-1".key] = "test-value-1"
         cache.cache.value["test-value-2".key] = "test-value-2"
 
@@ -194,7 +194,7 @@ class SimpleMemCacheTest: XCTestCase {
 
     func test_delete_value() {
         /// Given
-        let cache = SimpleMemCache<String, String>()
+        let cache = ObservableMemCache<String>()
         cache.cache.value["test-value-1".key] = "test-value-1"
         cache.cache.value["test-value-2".key] = "test-value-2"
 
@@ -216,7 +216,7 @@ class SimpleMemCacheTest: XCTestCase {
 
     func test_deleteAll() {
         /// Given
-        let cache = SimpleMemCache<String, String>()
+        let cache = ObservableMemCache<String>()
         cache.cache.value["test-value-1".key] = "test-value-1"
         cache.cache.value["test-value-2".key] = "test-value-2"
         cache.cache.value["test-value-3".key] = "test-value-3"
@@ -245,7 +245,7 @@ class SimpleMemCacheTest: XCTestCase {
 
     func test_clear() {
         /// Given
-        let cache = SimpleMemCache<String, String>()
+        let cache = ObservableMemCache<String>()
         cache.cache.value["test-value-1".key] = "test-value-1"
         cache.cache.value["test-value-2".key] = "test-value-2"
 

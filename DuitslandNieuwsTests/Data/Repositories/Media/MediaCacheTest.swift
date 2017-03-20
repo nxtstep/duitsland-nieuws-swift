@@ -6,7 +6,6 @@
 import XCTest
 import RxSwift
 import RxTest
-import OrderedDictionary
 @testable import DuitslandNieuws
 
 extension Media {
@@ -22,9 +21,9 @@ extension Media {
 }
 
 extension MediaDetails {
-    static func createTestMedia() -> MediaDetails{
-        let item = MediaItem(file: "media_item_small.jpg", width: 5, height:6, mimeType: "mime/jpeg", sourceUrl: "http://image.url.com/image_id/34.jpg")
-        let item2 = MediaItem(file: "media_item_full.jpg", width: 599, height:699, mimeType: "mime/jpeg", sourceUrl: "http://image.url.com/image_id/34_big.jpg")
+    static func createTestMedia() -> MediaDetails {
+        let item = MediaItem(file: "media_item_small.jpg", width: 5, height: 6, mimeType: "mime/jpeg", sourceUrl: "http://image.url.com/image_id/34.jpg")
+        let item2 = MediaItem(file: "media_item_full.jpg", width: 599, height: 699, mimeType: "mime/jpeg", sourceUrl: "http://image.url.com/image_id/34_big.jpg")
         return MediaDetails(width: 10, height: 12, file: "filename.jpg", sizes: [MediaItem.IMAGE_THUMBNAIL: item, MediaItem.IMAGE_FULL: item2])
     }
 }
@@ -34,9 +33,7 @@ class MediaCacheTest: XCTestCase {
     func test_get() {
         /// Given
         let testMedia = Media.createTestMedia("123")
-        var dict = OrderedDictionary<String, Media>()
-        dict[testMedia.key] = testMedia
-        let cache = MediaCache(values: dict)
+        let cache = MediaCache([testMedia])
 
         /// When - wrong id
         let scheduler = TestScheduler(initialClock: 0)
@@ -68,10 +65,7 @@ class MediaCacheTest: XCTestCase {
         /// Given
         let testMedia1 = Media.createTestMedia("1")
         let testMedia2 = Media.createTestMedia("2")
-        var dict = OrderedDictionary<String, Media>()
-        dict[testMedia1.key] = testMedia1
-        dict[testMedia2.key] = testMedia2
-        let cache = MediaCache(values: dict)
+        let cache = MediaCache([testMedia1, testMedia2])
 
         /// When
         let scheduler = TestScheduler(initialClock: 0)
@@ -126,10 +120,7 @@ class MediaCacheTest: XCTestCase {
         /// Given
         let testMedia1 = Media.createTestMedia("1")
         let testMedia2 = Media.createTestMedia("2")
-        var dict = OrderedDictionary<String, Media>()
-        dict[testMedia1.key] = testMedia1
-        dict[testMedia2.key] = testMedia2
-        let cache = MediaCache(values: dict)
+        let cache = MediaCache([testMedia1, testMedia2])
 
         /// When
         let scheduler = TestScheduler(initialClock: 0)
@@ -210,10 +201,7 @@ class MediaCacheTest: XCTestCase {
         /// Given
         let testMedia1 = Media.createTestMedia("1")
         let testMedia2 = Media.createTestMedia("2")
-        var dict = OrderedDictionary<String, Media>()
-        dict[testMedia1.key] = testMedia1
-        dict[testMedia2.key] = testMedia2
-        let cache = MediaCache(values: dict)
+        let cache = MediaCache([testMedia1, testMedia2])
 
         /// When
         let scheduler = TestScheduler(initialClock: 0)
@@ -245,10 +233,7 @@ class MediaCacheTest: XCTestCase {
         /// Given
         let testMedia1 = Media.createTestMedia("1")
         let testMedia2 = Media.createTestMedia("2")
-        var dict = OrderedDictionary<String, Media>()
-        dict[testMedia1.key] = testMedia1
-        dict[testMedia2.key] = testMedia2
-        let cache = MediaCache(values: dict)
+        let cache = MediaCache([testMedia1, testMedia2])
 
         /// When
         let scheduler = TestScheduler(initialClock: 0)
@@ -282,11 +267,7 @@ class MediaCacheTest: XCTestCase {
         let testMedia1 = Media.createTestMedia("1")
         let testMedia2 = Media.createTestMedia("2")
         let testMedia3 = Media.createTestMedia("3")
-        var dict = OrderedDictionary<String, Media>()
-        dict[testMedia1.key] = testMedia1
-        dict[testMedia2.key] = testMedia2
-        dict[testMedia3.key] = testMedia3
-        let cache = MediaCache(values: dict)
+        let cache = MediaCache([testMedia1, testMedia2, testMedia3])
 
         /// When
         let scheduler = TestScheduler(initialClock: 0)

@@ -4,50 +4,52 @@
 //
 
 import Foundation
-import OrderedDictionary
 import RxSwift
 
 class MediaCache: Cache {
-    typealias K = String
-    typealias V = Media
+    typealias E = Media
 
-    required init(values dict: OrderedDictionary<K, V> = OrderedDictionary<K, V>()) {
-        self.cache = SimpleMemCache(values: dict)
+    required init(_ values: [Media]) {
+        self.cache = ObservableMemCache(values)
     }
 
-    func get(_ id: K) -> Observable<V> {
+    convenience init() {
+        self.init([Media]())
+    }
+
+    func get(_ id: E.K) -> Observable<E> {
         return cache.get(id)
     }
 
-    func list(_ page: Int, pageSize size: Int) -> Observable<[V]> {
+    func list(_ page: Int, pageSize size: Int) -> Observable<[E]> {
         return cache.list(page, pageSize: size)
     }
 
-    func listAll() -> Observable<[V]> {
+    func listAll() -> Observable<[E]> {
         return cache.listAll()
     }
 
-    func save(_ value: V) -> Observable<V> {
+    func save(_ value: E) -> Observable<E> {
         return cache.save(value)
     }
 
-    func save(_ values: [V]) -> Observable<[V]> {
+    func save(_ values: [E]) -> Observable<[E]> {
         return cache.save(values)
     }
 
-    func delete(id: K) -> Observable<V> {
+    func delete(id: E.K) -> Observable<E> {
         return cache.delete(id: id)
     }
 
-    func delete(_ value: V) -> Observable<V> {
+    func delete(_ value: E) -> Observable<E> {
         return cache.delete(value)
     }
 
-    func deleteAll() -> Observable<[V]> {
+    func deleteAll() -> Observable<[E]> {
         return cache.deleteAll()
     }
 
-    fileprivate let cache: SimpleMemCache<K, V>
+    fileprivate let cache: ObservableMemCache<E>
 }
 
 extension Media: Identifiable {
