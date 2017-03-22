@@ -37,8 +37,6 @@ class DetailViewController: UIViewController, ArticleDetailView {
                 mainScheduler: schedulerProvider.main,
                 ioScheduler: schedulerProvider.io)
 
-        /// Navigation bar
-        self.navigationController?.navigationBar.cn_init()
         self.scrollView.delegate = self
     }
 
@@ -46,6 +44,7 @@ class DetailViewController: UIViewController, ArticleDetailView {
         super.viewWillAppear(animated)
 
         /// Navigation bar
+        self.navigationController?.navigationBar.cn_init()
         UIApplication.shared.statusBarStyle = .lightContent
         self.navigationController?.navigationBar.tintColor = tintColor
         self.title = nil
